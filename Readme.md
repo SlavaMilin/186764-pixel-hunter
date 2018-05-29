@@ -1,7 +1,7 @@
 # Личный проект «Пиксель хантер» [![Build status][travis-image]][travis-url]
 
 * Студент: [Slava Milin](https://up.htmlacademy.ru/ecmascript/5/user/186764).
-* Наставник: `Неизвестно`.
+* Наставник: [Игорь Антонов](https://htmlacademy.ru/profile/antonov).
 
 ---
 

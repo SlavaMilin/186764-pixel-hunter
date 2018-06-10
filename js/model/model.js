@@ -22,6 +22,10 @@ class Model {
     return false;
   }
 
+  get getErrors() {
+    return this._state.errors;
+  }
+
   tick() {
     this._state.time -= 1;
   }

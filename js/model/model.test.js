@@ -49,6 +49,10 @@ describe(`test model`, () => {
     assert.equal(model.getTimeValue, 29);
   });
 
+  it(`should get errors value`, () => {
+    assert.equal(model.getErrors, 0);
+  });
+
   it(`should add answer to state`, () => {
     assert.lengthOf(model.getState.answers, 0);
     model.addAnswer(fastAnswer);

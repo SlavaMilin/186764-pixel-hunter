@@ -62,7 +62,10 @@ describe(`test model`, () => {
   it(`should add answer to state`, () => {
     assert.lengthOf(model.getState.answers, 0);
     model.addAnswer(fastAnswer);
-    assert.lengthOf(model.getState.answers, 1);
+    model.addAnswer(slowAnswer);
+    model.addAnswer(regularAnswer);
+    model.addAnswer(errorAnswer);
+    assert.lengthOf(model.getState.answers, 4);
   });
 
   it(`should check is game lose`, () => {

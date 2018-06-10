@@ -15,6 +15,13 @@ class Model {
     return this._state.time;
   }
 
+  get isLose() {
+    if (this._state.errors > 3) {
+      return true;
+    }
+    return false;
+  }
+
   tick() {
     this._state.time -= 1;
   }

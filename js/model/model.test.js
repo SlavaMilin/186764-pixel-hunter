@@ -54,4 +54,8 @@ describe(`test model`, () => {
     model.addAnswer(fastAnswer);
     assert.lengthOf(model.getState.answers, 1);
   });
+
+  it(`should check is game lose`, () => {
+    assert.equal(model.isLose, false);
+  });
 });

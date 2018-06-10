@@ -73,6 +73,6 @@ describe(`test model`, () => {
   });
 
   it(`should check is it little time`, () => {
-    assert.equal(model.isLitleTime, false);
+    assert.equal(model.isLittleTime, false);
   });
 });

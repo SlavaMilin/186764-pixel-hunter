@@ -71,4 +71,8 @@ describe(`test model`, () => {
   it(`should check is game lose`, () => {
     assert.equal(model.isLose, false);
   });
+
+  it(`should check is it little time`, () => {
+    assert.equal(model.isLitleTime, false);
+  });
 });

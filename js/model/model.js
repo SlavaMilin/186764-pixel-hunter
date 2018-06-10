@@ -23,6 +23,10 @@ class Model {
     return this._state.errors;
   }
 
+  get isLitleTime() {
+    return this._state.time < 5;
+  }
+
   addError() {
     this._state.errors += 1;
   }

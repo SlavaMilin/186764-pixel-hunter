@@ -16,10 +16,7 @@ class Model {
   }
 
   get isLose() {
-    if (this._state.errors > 3) {
-      return true;
-    }
-    return false;
+    return this._state.errors > 3;
   }
 
   get getErrors() {

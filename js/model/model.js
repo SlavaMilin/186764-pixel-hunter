@@ -26,6 +26,10 @@ class Model {
     return this._state.errors;
   }
 
+  addError() {
+    this._state.errors += 1;
+  }
+
   tick() {
     this._state.time -= 1;
   }

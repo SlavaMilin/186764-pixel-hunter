@@ -53,6 +53,12 @@ describe(`test model`, () => {
     assert.equal(model.getErrors, 0);
   });
 
+  it(`should add + 1 error`, () => {
+    assert.equal(model.getErrors, 0);
+    model.addError();
+    assert.equal(model.getErrors, 1);
+  });
+
   it(`should add answer to state`, () => {
     assert.lengthOf(model.getState.answers, 0);
     model.addAnswer(fastAnswer);

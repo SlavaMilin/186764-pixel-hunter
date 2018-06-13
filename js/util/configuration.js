@@ -1,4 +1,4 @@
-class InitialState {
+class Configuration {
   static getState() {
     return {
       errors: 0,
@@ -9,4 +9,4 @@ class InitialState {
   }
 }
 
-export default InitialState;
+export default Configuration;

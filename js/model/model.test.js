@@ -1,6 +1,6 @@
 import {assert} from "chai";
 import Model from "./model";
-import InitialState from "../initial-statle";
+import Configuration from "../util/configuration";
 
 const fastAnswer = {
   time: 5,
@@ -23,10 +23,10 @@ const errorAnswer = {
 };
 
 describe(`test model`, () => {
-  const model = new Model(InitialState.getState());
+  const model = new Model(Configuration.getState());
 
   it(`should return state`, () => {
-    assert.deepEqual(model.getState, InitialState.getState());
+    assert.deepEqual(model.getState, Configuration.getState());
   });
 
   it(`should return screen value`, () => {

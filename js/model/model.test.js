@@ -29,6 +29,13 @@ describe(`test model`, () => {
     assert.deepEqual(model.getState, Configuration.getState());
   });
 
+  it(`should reset state to default`, () => {
+    model.tick();
+    assert.deepEqual(model._initialState, Configuration.getState());
+    model.resetToDefault();
+    assert.deepEqual(model.getState, Configuration.getState());
+  });
+
   it(`should return screen value`, () => {
     assert.equal(model.getScreenValue, 0);
   });

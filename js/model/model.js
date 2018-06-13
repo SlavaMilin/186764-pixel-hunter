@@ -1,6 +1,7 @@
 class Model {
   constructor(state) {
     this._state = state;
+    this._initialState = Object.assign({}, state);
   }
 
   get getState() {
@@ -25,6 +26,10 @@ class Model {
 
   get isLittleTime() {
     return this._state.time < 5;
+  }
+
+  resetToDefault() {
+    this._state = Object.assign({}, this._initialState);
   }
 
   addError() {

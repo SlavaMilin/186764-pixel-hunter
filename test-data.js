@@ -1,3 +1,5 @@
+// to start add package and run in cli: ws --mocks test-data.js
+
 module.exports = MockBase => class MockRivers extends MockBase {
   mocks () {
     return {

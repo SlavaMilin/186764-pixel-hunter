@@ -9,7 +9,7 @@ class Model {
   }
 
   get getScreenValue() {
-    return this._state.screen;
+    return this._state.level;
   }
 
   get getTimeValue() {
@@ -28,6 +28,14 @@ class Model {
     return this._state.time < 5;
   }
 
+  get getLevelData() {
+    return this._state.data[this._state.level];
+  }
+
+  set setData(data) {
+    this._state.data = data;
+  }
+
   resetToDefault() {
     this._state = Object.assign({}, this._initialState);
   }
@@ -41,7 +49,7 @@ class Model {
   }
 
   setNextScreen() {
-    this._state.screen += 1;
+    this._state.level += 1;
   }
 
   addAnswer(answer) {

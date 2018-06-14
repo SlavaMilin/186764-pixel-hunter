@@ -3,7 +3,7 @@ class Configuration {
     return {
       errors: 0,
       time: 30,
-      screen: 0,
+      level: 0,
       answers: []
     };
   }

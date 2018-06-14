@@ -157,4 +157,11 @@ describe(`test model`, () => {
     model.setData = testData;
     assert.deepEqual(model.getLevelData, testData[0]);
   });
+
+  it(`should check is it more game screen`, () => {
+    assert.equal(model.isMoreGameScreen, true);
+    model._state.level = 4;
+    assert.equal(model.isMoreGameScreen, false);
+    model.resetToDefault();
+  });
 });

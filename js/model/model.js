@@ -1,6 +1,6 @@
 class Model {
   constructor(state) {
-    this._state = state;
+    this._state = Object.assign({}, state);
     this._initialState = Object.assign({}, state);
   }
 
@@ -32,12 +32,16 @@ class Model {
     return this._state.data[this._state.level];
   }
 
+  get isMoreGameScreen() {
+    return this._state.level < this._state.data.length;
+  }
+
   set setData(data) {
     this._state.data = data;
   }
 
   resetToDefault() {
-    this._state = Object.assign({}, this._initialState);
+    this._state = Object.assign({}, this._state, this._initialState);
   }
 
   addError() {

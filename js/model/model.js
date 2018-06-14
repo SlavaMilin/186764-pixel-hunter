@@ -41,7 +41,7 @@ class Model {
   }
 
   resetToDefault() {
-    this._state = Object.assign({}, this._state, this._initialState);
+    this._state = Object.assign({}, this._initialState);
   }
 
   addError() {

@@ -31,15 +31,15 @@ class Model {
   }
 
   get getLevelData() {
-    return this._state.data[this._state.level];
+    return this._data[this._state.level];
   }
 
   get isMoreGameScreen() {
-    return this._state.level < this._state.data.length;
+    return this._state.level < this._data.length;
   }
 
   set setData(data) {
-    this._state.data = data;
+    this._data = data;
   }
 
   get getCurrentGameType() {

@@ -93,6 +93,7 @@ const testData = [
 
 describe(`test model`, () => {
   const model = new Model(Configuration.getState());
+  model.setData = testData;
 
   it(`should return state`, () => {
     assert.deepEqual(model.getState, Configuration.getState());
@@ -161,8 +162,6 @@ describe(`test model`, () => {
   });
 
   it(`should return level data`, () => {
-    model.resetToDefault();
-    model.setData = testData;
     assert.deepEqual(model.getLevelData, testData[0]);
   });
 
@@ -174,7 +173,6 @@ describe(`test model`, () => {
   });
 
   it(`should return answer for current game`, () => {
-    model.setData = testData;
     assert.equal(model.getCorrectAnswer, `Правильный ответ: 3`);
     model.goNextLevel();
     assert.equal(model.getCorrectAnswer, `Правильный ответ: 1 - painting, 2 - photo`);

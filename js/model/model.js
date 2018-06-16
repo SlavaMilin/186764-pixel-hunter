@@ -40,6 +40,42 @@ class Model {
     this._state.data = data;
   }
 
+  get getCurrentGameType() {
+    return this.getLevelData[`type`];
+  }
+
+  get getCurrentGameAnswers() {
+    return this.getLevelData[`answers`];
+  }
+
+  get getCorrectAnswer() {
+    let answers = [];
+    switch (this.getCurrentGameType) {
+      case `one-of-three`:
+        for (let i = 0; i < this.getCurrentGameAnswers.length; i++) {
+          const length = this.getCurrentGameAnswers.filter((el) => {
+            return el.type === this.getCurrentGameAnswers[i].type;
+          }).length;
+          if (length === 1) {
+            answers.push(i + 1);
+            break;
+          }
+        }
+        break;
+
+      case `two-of-two`:
+        this.getCurrentGameAnswers.forEach((key, i) => {
+          answers.push(`${i + 1} - ${key.type}`);
+        });
+        break;
+
+      case `tinder-like`:
+        answers.push(this.getCurrentGameAnswers[0].type);
+        break;
+    }
+    return `Правильный ответ: ${answers.join(`, `)}`;
+  }
+
   resetToDefault() {
     this._state = Object.assign({}, this._initialState);
   }
@@ -52,7 +88,7 @@ class Model {
     this._state.time -= 1;
   }
 
-  setNextScreen() {
+  goNextLevel() {
     this._state.level += 1;
   }
 

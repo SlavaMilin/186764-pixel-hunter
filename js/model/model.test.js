@@ -111,7 +111,7 @@ describe(`test model`, () => {
 
   it(`should increase screen number by 1`, () => {
     assert.equal(model.getScreenValue, 0);
-    model.setNextScreen();
+    model.goNextLevel();
     assert.equal(model.getScreenValue, 1);
   });
 
@@ -162,6 +162,16 @@ describe(`test model`, () => {
     assert.equal(model.isMoreGameScreen, true);
     model._state.level = 4;
     assert.equal(model.isMoreGameScreen, false);
+    model.resetToDefault();
+  });
+
+  it(`should return answer for current game`, () => {
+    model.setData = testData;
+    assert.equal(model.getCorrectAnswer, `Правильный ответ: 3`);
+    model.goNextLevel();
+    assert.equal(model.getCorrectAnswer, `Правильный ответ: 1 - painting, 2 - photo`);
+    model.goNextLevel();
+    assert.equal(model.getCorrectAnswer, `Правильный ответ: photo`);
     model.resetToDefault();
   });
 });

@@ -17,7 +17,7 @@ class Model {
   }
 
   get isLose() {
-    return this._state.live > 3;
+    return this._state.live < 1 || this._state.time < 1;
   }
 
   get getErrors() {

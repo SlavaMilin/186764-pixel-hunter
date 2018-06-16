@@ -146,6 +146,12 @@ describe(`test model`, () => {
 
   it(`should check is game lose`, () => {
     assert.equal(model.isLose, false);
+    model._state.live = 0;
+    assert.equal(model.isLose, true);
+    model.resetToDefault();
+    model._state.time = 0;
+    assert.equal(model.isLose, true);
+    model.resetToDefault();
   });
 
   it(`should check is it little time`, () => {

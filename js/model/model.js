@@ -40,7 +40,7 @@ class Model {
   }
 
   set setData(data) {
-    this._data = data;
+    this._data = [...data];
   }
 
   get getCurrentGameType() {

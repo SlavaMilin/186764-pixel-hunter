@@ -4,6 +4,7 @@ class Model {
   constructor(state) {
     this._state = Object.assign({}, state);
     this._initialState = Object.assign({}, state);
+    this._data = [];
   }
 
   get getState() {

@@ -1,3 +1,5 @@
+import Configuration from "../util/configuration";
+
 class Model {
   constructor(state) {
     this._state = Object.assign({}, state);
@@ -25,7 +27,7 @@ class Model {
   }
 
   get isLittleTime() {
-    return this._state.time < 5;
+    return this._state.time < Configuration.gameSettings().littleTime;
   }
 
   get getLevelData() {

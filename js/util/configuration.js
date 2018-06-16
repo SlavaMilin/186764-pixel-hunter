@@ -7,6 +7,12 @@ class Configuration {
       answers: []
     };
   }
+
+  static gameSettings() {
+    return {
+      littleTime: 5
+    };
+  }
 }
 
 export default Configuration;

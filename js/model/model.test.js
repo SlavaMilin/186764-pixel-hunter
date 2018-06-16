@@ -156,6 +156,8 @@ describe(`test model`, () => {
 
   it(`should check is it little time`, () => {
     assert.equal(model.isLittleTime, false);
+    model._state.time = 1;
+    assert.equal(model.isLittleTime, true);
   });
 
   it(`should return level data`, () => {

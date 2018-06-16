@@ -126,13 +126,13 @@ describe(`test model`, () => {
   });
 
   it(`should get errors value`, () => {
-    assert.equal(model.getErrors, 0);
+    assert.equal(model.getErrors, 3);
   });
 
-  it(`should add + 1 error`, () => {
-    assert.equal(model.getErrors, 0);
-    model.addError();
-    assert.equal(model.getErrors, 1);
+  it(`should subtract live`, () => {
+    assert.equal(model.getErrors, 3);
+    model.die();
+    assert.equal(model.getErrors, 2);
   });
 
   it(`should add answer to state`, () => {

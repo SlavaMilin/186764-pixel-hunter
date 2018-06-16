@@ -17,11 +17,11 @@ class Model {
   }
 
   get isLose() {
-    return this._state.errors > 3;
+    return this._state.live > 3;
   }
 
   get getErrors() {
-    return this._state.errors;
+    return this._state.live;
   }
 
   get isLittleTime() {
@@ -80,8 +80,8 @@ class Model {
     this._state = Object.assign({}, this._initialState);
   }
 
-  addError() {
-    this._state.errors += 1;
+  die() {
+    this._state.live -= 1;
   }
 
   tick() {

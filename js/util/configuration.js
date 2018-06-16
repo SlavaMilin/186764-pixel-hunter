@@ -1,7 +1,7 @@
 class Configuration {
   static getState() {
     return {
-      errors: 0,
+      live: 3,
       time: 30,
       level: 0,
       answers: []

@@ -4,7 +4,6 @@ class Model {
   constructor() {
     this._configuration = new Configuration();
     this._state = Object.assign({}, this._configuration.InitialState);
-    this._initialState = Object.assign({}, this._state);
     this._data = [];
   }
 
@@ -85,7 +84,7 @@ class Model {
   }
 
   resetStateToDefault() {
-    this._state = Object.assign({}, this._initialState);
+    this._state = Object.assign({}, this._configuration.InitialState);
   }
 
   die() {
@@ -115,11 +114,11 @@ class Model {
       }
     }
 
-    if (this.getTimeValue > this._initialState.time - this._configuration.GameSettings.FAST_ANSWER) {
+    if (this.getTimeValue > this._configuration.InitialState.time - this._configuration.GameSettings.FAST_ANSWER) {
       fast = true;
     }
 
-    if (this.getTimeValue < this._initialState.time - this._configuration.GameSettings.SLOW_ANSWER) {
+    if (this.getTimeValue < this._configuration.InitialState.time - this._configuration.GameSettings.SLOW_ANSWER) {
       slow = true;
     }
 

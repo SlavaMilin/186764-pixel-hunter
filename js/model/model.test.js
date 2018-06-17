@@ -102,7 +102,6 @@ describe(`test model`, () => {
 
   it(`should reset state to default`, () => {
     model.tick();
-    assert.deepEqual(model._initialState, configuration.InitialState);
     model.resetStateToDefault();
     assert.deepEqual(model.getState, configuration.InitialState);
   });

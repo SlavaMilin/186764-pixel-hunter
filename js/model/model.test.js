@@ -4,7 +4,8 @@ import Configuration from "../util/configuration";
 
 const firstAnswer = [2];
 const secondAnswer = [`painting`, `photo`];
-const thirdAnswer = [`painting`];
+const thirdAnswer = [`photo`];
+const fourthAnswer = [`painting`];
 
 const testData = [
   {
@@ -72,6 +73,20 @@ const testData = [
         type: `photo`
       }
     ]
+  },
+  {
+    type: `tinder-like`,
+    question: `Угадай, фото или рисунок?`,
+    answers: [
+      {
+        image: {
+          url: `http://via.placeholder.com/350x250`,
+          width: 350,
+          height: 250
+        },
+        type: `photo`
+      }
+    ]
   }
 ];
 
@@ -111,18 +126,18 @@ describe(`test model`, () => {
   });
 
   it(`should get errors value`, () => {
-    assert.equal(model.getErrors, 3);
+    assert.equal(model.getLives, 3);
   });
 
   it(`should subtract live`, () => {
-    assert.equal(model.getErrors, 3);
+    assert.equal(model.getLives, 3);
     model.die();
-    assert.equal(model.getErrors, 2);
+    assert.equal(model.getLives, 2);
   });
 
   it(`should check is game lose`, () => {
     assert.equal(model.isLose, false);
-    model._state.live = 0;
+    model._state.lives = 0;
     assert.equal(model.isLose, true);
     model.resetToDefault();
     model._state.time = 0;
@@ -153,6 +168,26 @@ describe(`test model`, () => {
     assert.deepEqual(model.getCorrectAnswer, [`painting`, `photo`]);
     model.goNextLevel();
     assert.deepEqual(model.getCorrectAnswer, [`photo`]);
+    model.resetToDefault();
+  });
+
+  it(`should check answer, save it to statistic of the game, and remove live if answer is wrong`, () => {
+    model.saveAnswer(firstAnswer);
+    model._state.time = 3;
+    model.goNextLevel();
+
+    model.saveAnswer(secondAnswer);
+    model._state.time = 15;
+    model.goNextLevel();
+
+    model.saveAnswer(thirdAnswer);
+    model.goNextLevel();
+
+    model.saveAnswer(fourthAnswer);
+
+    assert.deepEqual(model.getStatistic, [`fast`, `slow`, `correct`, `wrong`]);
+    assert.equal(model.getLives, 2);
+
     model.resetToDefault();
   });
 });

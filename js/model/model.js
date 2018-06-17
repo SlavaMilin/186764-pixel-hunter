@@ -5,6 +5,7 @@ class Model {
     this._state = Object.assign({}, Configuration.getState());
     this._initialState = Object.assign({}, this._state);
     this._data = [];
+    this._configuration = new Configuration();
   }
 
   get getState() {
@@ -20,11 +21,11 @@ class Model {
   }
 
   get isLose() {
-    return this._state.live < 1 || this._state.time < 1;
+    return this._state.lives < 1 || this._state.time < 1;
   }
 
-  get getErrors() {
-    return this._state.live;
+  get getLives() {
+    return this._state.lives;
   }
 
   get isLittleTime() {
@@ -45,6 +46,10 @@ class Model {
 
   get getCurrentGameAnswers() {
     return this.getLevelData[`answers`];
+  }
+
+  get getStatistic() {
+    return this._state.statistic;
   }
 
   get getCorrectAnswer() {
@@ -84,7 +89,7 @@ class Model {
   }
 
   die() {
-    this._state.live -= 1;
+    this._state.lives -= 1;
   }
 
   tick() {
@@ -93,6 +98,46 @@ class Model {
 
   goNextLevel() {
     this._state.level += 1;
+  }
+
+  saveAnswer(answers) {
+    let fast = false;
+    let slow = false;
+    let correct = true;
+
+    const correctAnswer = this.getCorrectAnswer;
+
+    for (let i = 0; i < answers.length; i++) {
+      if (answers[i] !== correctAnswer[i]) {
+        correct = false;
+        this.die();
+        break;
+      }
+    }
+
+    if (this.getTimeValue > this._initialState.time - this._configuration.GameSettings.fastAnswer) {
+      fast = true;
+    }
+
+    if (this.getTimeValue < this._initialState.time - this._configuration.GameSettings.slowAnswer) {
+      slow = true;
+    }
+
+    if (fast && correct) {
+      this._state.statistic.push(this._configuration.Result.FAST);
+    }
+
+    if (slow && correct) {
+      this._state.statistic.push(this._configuration.Result.SLOW);
+    }
+
+    if (!fast && !slow && correct) {
+      this._state.statistic.push(this._configuration.Result.CORRECT);
+    }
+
+    if (correct === false) {
+      this._state.statistic.push(this._configuration.Result.WRONG);
+    }
   }
 }
 

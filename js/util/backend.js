@@ -1,6 +1,9 @@
 import Configuration from "./configuration";
 
 class Backend {
+  constructor() {
+    this.settings = new Configuration();
+  }
   toJSON(response) {
     response.json();
   }
@@ -13,7 +16,7 @@ class Backend {
   }
 
   static loadData() {
-    return fetch(Configuration.gameSettings().getQuestionsUrl).then(this.checkStatus).then(this.toJSON);
+    return fetch(this.settings.BackendSettings.getQuestionsUrl).then(this.checkStatus).then(this.toJSON);
   }
 }
 

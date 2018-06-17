@@ -2,10 +2,10 @@ import Configuration from "../util/configuration";
 
 class Model {
   constructor() {
-    this._state = Object.assign({}, Configuration.getState());
+    this._configuration = new Configuration();
+    this._state = Object.assign({}, this._configuration.InitialState);
     this._initialState = Object.assign({}, this._state);
     this._data = [];
-    this._configuration = new Configuration();
   }
 
   get getState() {
@@ -29,7 +29,7 @@ class Model {
   }
 
   get isLittleTime() {
-    return this._state.time < Configuration.gameSettings().littleTime;
+    return this._state.time < this._configuration.GameSettings.littleTime;
   }
 
   get getLevelData() {
@@ -55,7 +55,7 @@ class Model {
   get getCorrectAnswer() {
     let answers = [];
     switch (this.getCurrentGameType) {
-      case Configuration.questionType().ONE_OF_THREE:
+      case this._configuration.questionType.ONE_OF_THREE:
         for (let i = 0; i < this.getCurrentGameAnswers.length; i++) {
           const length = this.getCurrentGameAnswers.filter((el) => {
             return el.type === this.getCurrentGameAnswers[i].type;
@@ -67,13 +67,13 @@ class Model {
         }
         break;
 
-      case Configuration.questionType().TWO_OF_TWO:
+      case this._configuration.questionType.TWO_OF_TWO:
         for (const key of this.getCurrentGameAnswers) {
           answers.push(key.type);
         }
         break;
 
-      case Configuration.questionType().TINDER_LIKE:
+      case this._configuration.questionType.TINDER_LIKE:
         answers.push(this.getCurrentGameAnswers[0].type);
         break;
     }

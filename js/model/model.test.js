@@ -7,6 +7,8 @@ const secondAnswer = [`painting`, `photo`];
 const thirdAnswer = [`photo`];
 const fourthAnswer = [`painting`];
 
+const configuration = new Configuration();
+
 const testData = [
   {
     type: `one-of-three`,
@@ -95,14 +97,14 @@ describe(`test model`, () => {
   model.setData = testData;
 
   it(`should return state`, () => {
-    assert.deepEqual(model.getState, Configuration.getState());
+    assert.deepEqual(model.getState, configuration.InitialState);
   });
 
   it(`should reset state to default`, () => {
     model.tick();
-    assert.deepEqual(model._initialState, Configuration.getState());
+    assert.deepEqual(model._initialState, configuration.InitialState);
     model.resetToDefault();
-    assert.deepEqual(model.getState, Configuration.getState());
+    assert.deepEqual(model.getState, configuration.InitialState);
   });
 
   it(`should return screen value`, () => {

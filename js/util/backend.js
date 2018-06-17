@@ -16,7 +16,7 @@ class Backend {
   }
 
   static loadData() {
-    return fetch(this.settings.BackendSettings.getQuestionsUrl).then(this.checkStatus).then(this.toJSON);
+    return fetch(this.settings.BackendSettings.GET_QUESTIONS_URL).then(this.checkStatus).then(this.toJSON);
   }
 }
 

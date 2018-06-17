@@ -29,7 +29,7 @@ class Model {
   }
 
   get isLittleTime() {
-    return this._state.time < this._configuration.GameSettings.littleTime;
+    return this._state.time < this._configuration.GameSettings.LITTLE_TIME;
   }
 
   get getLevelData() {
@@ -115,11 +115,11 @@ class Model {
       }
     }
 
-    if (this.getTimeValue > this._initialState.time - this._configuration.GameSettings.fastAnswer) {
+    if (this.getTimeValue > this._initialState.time - this._configuration.GameSettings.FAST_ANSWER) {
       fast = true;
     }
 
-    if (this.getTimeValue < this._initialState.time - this._configuration.GameSettings.slowAnswer) {
+    if (this.getTimeValue < this._initialState.time - this._configuration.GameSettings.SLOW_ANSWER) {
       slow = true;
     }
 

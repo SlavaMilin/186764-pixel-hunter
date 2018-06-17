@@ -15,13 +15,13 @@ class Configuration {
     };
 
     this.GameSettings = {
-      fastAnswer: 10,
-      slowAnswer: 20,
-      littleTime: 5
+      FAST_ANSWER: 10,
+      SLOW_ANSWER: 20,
+      LITTLE_TIME: 5
     };
 
     this.BackendSettings = {
-      getQuestionsUrl: `http://localhost:3000/questions`
+      GET_QUESTIONS_URL: `http://localhost:3000/questions`
     };
 
     this.questionType = {

@@ -173,22 +173,27 @@ describe(`test model`, () => {
     model.resetStateToDefault();
   });
 
-  it(`should check answer, save it to statistic of the game, and remove live if answer is wrong`, () => {
-    model.saveAnswer(firstAnswer);
-    model._state.time = 3;
-    model.goNextLevel();
+  describe(`check game statistic`, () => {
+    it(`should check answer, save it to statistic of the game, and remove live if answer is wrong`, () => {
+      model.saveAnswer(firstAnswer);
+      model._state.time = 3;
+      model.goNextLevel();
 
-    model.saveAnswer(secondAnswer);
-    model._state.time = 15;
-    model.goNextLevel();
+      model.saveAnswer(secondAnswer);
+      model._state.time = 15;
+      model.goNextLevel();
 
-    model.saveAnswer(thirdAnswer);
-    model.goNextLevel();
+      model.saveAnswer(thirdAnswer);
+      model.goNextLevel();
 
-    model.saveAnswer(fourthAnswer);
+      model.saveAnswer(fourthAnswer);
 
-    assert.deepEqual(model.getStatistic, [`fast`, `slow`, `correct`, `wrong`]);
-    assert.equal(model.getLives, 2);
+      assert.deepEqual(model.getStatistic, [`fast`, `slow`, `correct`, `wrong`]);
+    });
+
+    it(`should correct check rest lives`, () => {
+      assert.equal(model.getLives, 2);
+    });
 
     model.resetStateToDefault();
   });

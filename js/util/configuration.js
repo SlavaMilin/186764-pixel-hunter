@@ -21,7 +21,9 @@ class Configuration {
     };
 
     this.BackendSettings = {
-      GET_QUESTIONS_URL: `http://localhost:3000/questions`
+      GET_QUESTIONS_URL: `http://localhost:3000/questions`,
+      UPLOAD_STATISTIC_URL: `http://localhost:3000/stats`,
+      APP_ID: 186764
     };
 
     this.questionType = {

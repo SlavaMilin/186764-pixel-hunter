@@ -2,7 +2,7 @@ import Configuration from "./configuration";
 
 class Backend {
   constructor() {
-    this.settings = new Configuration();
+    this.configuration = new Configuration();
   }
   toJSON(response) {
     response.json();
@@ -16,7 +16,18 @@ class Backend {
   }
 
   static loadData() {
-    return fetch(this.settings.BackendSettings.GET_QUESTIONS_URL).then(this.checkStatus).then(this.toJSON);
+    return fetch(this.configuration.BackendSettings.GET_QUESTIONS_URL).then(this.checkStatus).then(this.toJSON);
+  }
+
+  static uploadStatistic(data, userName) {
+    const requestSettings = {
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': `application/json`
+      },
+      method: `POST`
+    };
+    return fetch(`${this.configuration.BackendSettings}/stats/:${this.constructor.BackendSettings.APP_ID}-:${userName}`, requestSettings).then(this.checkStatus);
   }
 }
 

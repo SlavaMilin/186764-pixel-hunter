@@ -10,7 +10,8 @@ class Configuration {
 
   static gameSettings() {
     return {
-      littleTime: 5
+      littleTime: 5,
+      getQuestionsUrl: `http://localhost:3000/questions`
     };
   }
 }

@@ -2,12 +2,12 @@ import {assert} from "chai";
 import Model from "./model";
 import Configuration from "../util/configuration";
 
+const configuration = new Configuration();
+
 const firstAnswer = [2];
 const secondAnswer = [`painting`, `photo`];
 const thirdAnswer = [`photo`];
 const fourthAnswer = [`painting`];
-
-const configuration = new Configuration();
 
 const testData = [
   {

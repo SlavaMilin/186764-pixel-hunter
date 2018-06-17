@@ -2,22 +2,9 @@ import {assert} from "chai";
 import Model from "./model";
 import Configuration from "../util/configuration";
 
-const fastAnswer = {
-  time: 5,
-  correct: true
-};
-
-const firstAnswer = {
-  answer: [2]
-};
-
-const secondAnswer = {
-  answer: [`painting`, `photo`]
-};
-
-const thirdAnswer = {
-  answer: [`photo`]
-};
+const firstAnswer = [2];
+const secondAnswer = [`painting`, `photo`];
+const thirdAnswer = [`painting`];
 
 const testData = [
   {
@@ -131,16 +118,6 @@ describe(`test model`, () => {
     assert.equal(model.getErrors, 3);
     model.die();
     assert.equal(model.getErrors, 2);
-  });
-
-  it(`should add answer to state`, () => {
-    assert.lengthOf(model.getState.answers, 0);
-    model.addAnswer(fastAnswer);
-    model.addAnswer(firstAnswer);
-    model.addAnswer(secondAnswer);
-    model.addAnswer(thirdAnswer);
-    assert.lengthOf(model.getState.answers, 4);
-    model.resetToDefault();
   });
 
   it(`should check is game lose`, () => {

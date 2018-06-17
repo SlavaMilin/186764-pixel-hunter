@@ -4,7 +4,6 @@ class Model {
   constructor() {
     this._state = Object.assign({}, Configuration.getState());
     this._initialState = Object.assign({}, this._state);
-    this._state.statistic = [];
     this._data = [];
   }
 
@@ -94,10 +93,6 @@ class Model {
 
   goNextLevel() {
     this._state.level += 1;
-  }
-
-  addAnswer(answer) {
-    this._state.answers.push(answer);
   }
 }
 

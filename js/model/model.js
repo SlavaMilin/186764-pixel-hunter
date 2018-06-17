@@ -39,10 +39,6 @@ class Model {
     return this._state.level < this._data.length;
   }
 
-  set setData(data) {
-    this._data = [...data];
-  }
-
   get getCurrentGameType() {
     return this.getLevelData[`type`];
   }
@@ -77,6 +73,10 @@ class Model {
         break;
     }
     return answers;
+  }
+
+  set setData(data) {
+    this._data = [...data];
   }
 
   resetToDefault() {

@@ -4,6 +4,7 @@ class Model {
   constructor() {
     this._state = Object.assign({}, Configuration.getState());
     this._initialState = Object.assign({}, this._state);
+    this._state.statistic = [];
     this._data = [];
   }
 
@@ -50,7 +51,7 @@ class Model {
   get getCorrectAnswer() {
     let answers = [];
     switch (this.getCurrentGameType) {
-      case `one-of-three`:
+      case Configuration.questionType().ONE_OF_THREE:
         for (let i = 0; i < this.getCurrentGameAnswers.length; i++) {
           const length = this.getCurrentGameAnswers.filter((el) => {
             return el.type === this.getCurrentGameAnswers[i].type;
@@ -62,13 +63,13 @@ class Model {
         }
         break;
 
-      case `two-of-two`:
+      case Configuration.questionType().TWO_OF_TWO:
         for (const key of this.getCurrentGameAnswers) {
           answers.push(key.type);
         }
         break;
 
-      case `tinder-like`:
+      case Configuration.questionType().TINDER_LIKE:
         answers.push(this.getCurrentGameAnswers[0].type);
         break;
     }

@@ -14,6 +14,21 @@ class Configuration {
       getQuestionsUrl: `http://localhost:3000/questions`
     };
   }
+
+  static answerType() {
+    return {
+      PAINTING: `painting`,
+      PHOTO: `photo`
+    };
+  }
+
+  static questionType() {
+    return {
+      TWO_OF_TWO: `two-of-two`,
+      TINDER_LIKE: `tinder-like`,
+      ONE_OF_THREE: `one-of-three`
+    };
+  }
 }
 
 export default Configuration;

@@ -7,19 +7,16 @@ const fastAnswer = {
   correct: true
 };
 
-const slowAnswer = {
-  time: 22,
-  correct: true
+const firstAnswer = {
+  answer: [2]
 };
 
-const regularAnswer = {
-  time: 15,
-  correct: true
+const secondAnswer = {
+  answer: [`painting`, `photo`]
 };
 
-const errorAnswer = {
-  time: 15,
-  correct: false
+const thirdAnswer = {
+  answer: [`photo`]
 };
 
 const testData = [
@@ -92,7 +89,7 @@ const testData = [
 ];
 
 describe(`test model`, () => {
-  const model = new Model(Configuration.getState());
+  const model = new Model();
   model.setData = testData;
 
   it(`should return state`, () => {
@@ -139,10 +136,11 @@ describe(`test model`, () => {
   it(`should add answer to state`, () => {
     assert.lengthOf(model.getState.answers, 0);
     model.addAnswer(fastAnswer);
-    model.addAnswer(slowAnswer);
-    model.addAnswer(regularAnswer);
-    model.addAnswer(errorAnswer);
+    model.addAnswer(firstAnswer);
+    model.addAnswer(secondAnswer);
+    model.addAnswer(thirdAnswer);
     assert.lengthOf(model.getState.answers, 4);
+    model.resetToDefault();
   });
 
   it(`should check is game lose`, () => {
@@ -173,11 +171,11 @@ describe(`test model`, () => {
   });
 
   it(`should return answer for current game`, () => {
-    assert.equal(model.getCorrectAnswer, `Правильный ответ: 3`);
+    assert.deepEqual(model.getCorrectAnswer, [2]);
     model.goNextLevel();
-    assert.equal(model.getCorrectAnswer, `Правильный ответ: 1 - painting, 2 - photo`);
+    assert.deepEqual(model.getCorrectAnswer, [`painting`, `photo`]);
     model.goNextLevel();
-    assert.equal(model.getCorrectAnswer, `Правильный ответ: photo`);
+    assert.deepEqual(model.getCorrectAnswer, [`photo`]);
     model.resetToDefault();
   });
 });

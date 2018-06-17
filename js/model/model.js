@@ -1,9 +1,9 @@
 import Configuration from "../util/configuration";
 
 class Model {
-  constructor(state) {
-    this._state = Object.assign({}, state);
-    this._initialState = Object.assign({}, state);
+  constructor() {
+    this._state = Object.assign({}, Configuration.getState());
+    this._initialState = Object.assign({}, this._state);
     this._data = [];
   }
 
@@ -60,23 +60,23 @@ class Model {
             return el.type === this.getCurrentGameAnswers[i].type;
           }).length;
           if (length === 1) {
-            answers.push(i + 1);
+            answers.push(i);
             break;
           }
         }
         break;
 
       case `two-of-two`:
-        this.getCurrentGameAnswers.forEach((key, i) => {
-          answers.push(`${i + 1} - ${key.type}`);
-        });
+        for (const key of this.getCurrentGameAnswers) {
+          answers.push(key.type);
+        }
         break;
 
       case `tinder-like`:
         answers.push(this.getCurrentGameAnswers[0].type);
         break;
     }
-    return `Правильный ответ: ${answers.join(`, `)}`;
+    return answers;
   }
 
   resetToDefault() {

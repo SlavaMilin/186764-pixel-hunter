@@ -103,7 +103,7 @@ describe(`test model`, () => {
   it(`should reset state to default`, () => {
     model.tick();
     assert.deepEqual(model._initialState, configuration.InitialState);
-    model.resetToDefault();
+    model.resetStateToDefault();
     assert.deepEqual(model.getState, configuration.InitialState);
   });
 
@@ -141,10 +141,10 @@ describe(`test model`, () => {
     assert.equal(model.isLose, false);
     model._state.lives = 0;
     assert.equal(model.isLose, true);
-    model.resetToDefault();
+    model.resetStateToDefault();
     model._state.time = 0;
     assert.equal(model.isLose, true);
-    model.resetToDefault();
+    model.resetStateToDefault();
   });
 
   it(`should check is it little time`, () => {
@@ -161,7 +161,7 @@ describe(`test model`, () => {
     assert.equal(model.isMoreGameScreen, true);
     model._state.level = 4;
     assert.equal(model.isMoreGameScreen, false);
-    model.resetToDefault();
+    model.resetStateToDefault();
   });
 
   it(`should return answer for current game`, () => {
@@ -170,7 +170,7 @@ describe(`test model`, () => {
     assert.deepEqual(model.getCorrectAnswer, [`painting`, `photo`]);
     model.goNextLevel();
     assert.deepEqual(model.getCorrectAnswer, [`photo`]);
-    model.resetToDefault();
+    model.resetStateToDefault();
   });
 
   it(`should check answer, save it to statistic of the game, and remove live if answer is wrong`, () => {
@@ -190,6 +190,6 @@ describe(`test model`, () => {
     assert.deepEqual(model.getStatistic, [`fast`, `slow`, `correct`, `wrong`]);
     assert.equal(model.getLives, 2);
 
-    model.resetToDefault();
+    model.resetStateToDefault();
   });
 });

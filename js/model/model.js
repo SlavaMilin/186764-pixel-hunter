@@ -84,7 +84,7 @@ class Model {
     this._data = [...data];
   }
 
-  resetToDefault() {
+  resetStateToDefault() {
     this._state = Object.assign({}, this._initialState);
   }
 

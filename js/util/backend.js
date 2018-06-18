@@ -1,6 +1,6 @@
 import Configuration from "./configuration";
 
-class Backend {
+export default class Backend {
   constructor() {
     this.configuration = new Configuration();
   }
@@ -30,5 +30,3 @@ class Backend {
     return fetch(`${this.configuration.BackendSettings}/stats/:${this.constructor.BackendSettings.APP_ID}-:${userName}`, requestSettings).then(this.checkStatus);
   }
 }
-
-export default Backend;

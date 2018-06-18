@@ -1,6 +1,6 @@
 import Configuration from "../util/configuration";
 
-class Model {
+export default class Model {
   constructor() {
     this._configuration = new Configuration();
     this._state = Object.assign({}, this._configuration.InitialState);
@@ -139,5 +139,3 @@ class Model {
     }
   }
 }
-
-export default Model;

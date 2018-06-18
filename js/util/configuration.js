@@ -1,4 +1,4 @@
-class Configuration {
+export default class Configuration {
   constructor() {
     this.InitialState = {
       lives: 3,
@@ -33,5 +33,3 @@ class Configuration {
     };
   }
 }
-
-export default Configuration;

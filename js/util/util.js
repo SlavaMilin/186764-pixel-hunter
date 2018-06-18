@@ -1,7 +1,8 @@
 class Util {
   static render(html) {
-    const container = document.querySelector(`#central`);
-    container.innerHTML = html.trim();
+    const element = document.createElement(`template`);
+    element.innerHTML = html.trim();
+    return element.content;
   }
 }
 

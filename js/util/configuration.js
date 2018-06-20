@@ -1,12 +1,5 @@
 export default class Configuration {
   constructor() {
-    this.Result = {
-      CORRECT: `correct`,
-      WRONG: `wrong`,
-      FAST: `fast`,
-      SLOW: `slow`
-    };
-
     this.GameSettings = {
       FAST_ANSWER: 10,
       SLOW_ANSWER: 20,
@@ -34,4 +27,11 @@ const InitialState = {
   statistic: []
 };
 
-export {InitialState};
+const Result = {
+  CORRECT: `correct`,
+  WRONG: `wrong`,
+  FAST: `fast`,
+  SLOW: `slow`
+};
+
+export {InitialState, Result};

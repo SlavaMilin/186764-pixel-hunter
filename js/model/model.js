@@ -1,4 +1,4 @@
-import Configuration, {InitialState} from "../util/configuration";
+import Configuration, {InitialState, Result} from "../util/configuration";
 
 export default class Model {
   constructor() {
@@ -123,19 +123,19 @@ export default class Model {
     }
 
     if (fast && correct) {
-      this._state.statistic.push(this._configuration.Result.FAST);
+      this._state.statistic.push(Result.FAST);
     }
 
     if (slow && correct) {
-      this._state.statistic.push(this._configuration.Result.SLOW);
+      this._state.statistic.push(Result.SLOW);
     }
 
     if (!fast && !slow && correct) {
-      this._state.statistic.push(this._configuration.Result.CORRECT);
+      this._state.statistic.push(Result.CORRECT);
     }
 
     if (correct === false) {
-      this._state.statistic.push(this._configuration.Result.WRONG);
+      this._state.statistic.push(Result.WRONG);
     }
   }
 }

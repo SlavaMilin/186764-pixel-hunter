@@ -5,12 +5,6 @@ export default class Configuration {
       UPLOAD_STATISTIC_URL: `http://localhost:3000/stats`,
       APP_ID: 186764
     };
-
-    this.questionType = {
-      TWO_OF_TWO: `two-of-two`,
-      TINDER_LIKE: `tinder-like`,
-      ONE_OF_THREE: `one-of-three`
-    };
   }
 }
 
@@ -34,4 +28,10 @@ const GameSettings = {
   LITTLE_TIME: 5
 };
 
-export {InitialState, Result, GameSettings};
+const QuestionType = {
+  TWO_OF_TWO: `two-of-two`,
+  TINDER_LIKE: `tinder-like`,
+  ONE_OF_THREE: `one-of-three`
+};
+
+export {InitialState, Result, GameSettings, QuestionType};

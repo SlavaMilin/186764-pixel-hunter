@@ -1,4 +1,4 @@
-import Configuration, {GameSettings, InitialState, Result} from "../util/configuration";
+import Configuration, {GameSettings, InitialState, QuestionType, Result} from "../util/configuration";
 
 export default class Model {
   constructor() {
@@ -54,7 +54,7 @@ export default class Model {
   get getCorrectAnswer() {
     let answers = [];
     switch (this.getCurrentGameType) {
-      case this._configuration.questionType.ONE_OF_THREE:
+      case QuestionType.ONE_OF_THREE:
         for (let i = 0; i < this.getCurrentGameAnswers.length; i++) {
           const length = this.getCurrentGameAnswers.filter((el) => {
             return el.type === this.getCurrentGameAnswers[i].type;
@@ -66,13 +66,13 @@ export default class Model {
         }
         break;
 
-      case this._configuration.questionType.TWO_OF_TWO:
+      case QuestionType.TWO_OF_TWO:
         for (const key of this.getCurrentGameAnswers) {
           answers.push(key.type);
         }
         break;
 
-      case this._configuration.questionType.TINDER_LIKE:
+      case QuestionType.TINDER_LIKE:
         answers.push(this.getCurrentGameAnswers[0].type);
         break;
     }

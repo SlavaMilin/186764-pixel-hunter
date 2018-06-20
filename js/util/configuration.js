@@ -1,11 +1,5 @@
 export default class Configuration {
   constructor() {
-    this.GameSettings = {
-      FAST_ANSWER: 10,
-      SLOW_ANSWER: 20,
-      LITTLE_TIME: 5
-    };
-
     this.BackendSettings = {
       GET_QUESTIONS_URL: `http://localhost:3000/questions`,
       UPLOAD_STATISTIC_URL: `http://localhost:3000/stats`,
@@ -34,4 +28,10 @@ const Result = {
   SLOW: `slow`
 };
 
-export {InitialState, Result};
+const GameSettings = {
+  FAST_ANSWER: 10,
+  SLOW_ANSWER: 20,
+  LITTLE_TIME: 5
+};
+
+export {InitialState, Result, GameSettings};

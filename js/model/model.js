@@ -1,4 +1,4 @@
-import Configuration, {InitialState, Result} from "../util/configuration";
+import Configuration, {GameSettings, InitialState, Result} from "../util/configuration";
 
 export default class Model {
   constructor() {
@@ -28,7 +28,7 @@ export default class Model {
   }
 
   get isLittleTime() {
-    return this._state.time < this._configuration.GameSettings.LITTLE_TIME;
+    return this._state.time < GameSettings.LITTLE_TIME;
   }
 
   get getLevelData() {
@@ -114,11 +114,11 @@ export default class Model {
       }
     }
 
-    if (this.getTimeValue > InitialState.time - this._configuration.GameSettings.FAST_ANSWER) {
+    if (this.getTimeValue > InitialState.time - GameSettings.FAST_ANSWER) {
       fast = true;
     }
 
-    if (this.getTimeValue < InitialState.time - this._configuration.GameSettings.SLOW_ANSWER) {
+    if (this.getTimeValue < InitialState.time - GameSettings.SLOW_ANSWER) {
       slow = true;
     }
 

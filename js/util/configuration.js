@@ -1,11 +1,4 @@
 export default class Configuration {
-  constructor() {
-    this.BackendSettings = {
-      GET_QUESTIONS_URL: `http://localhost:3000/questions`,
-      UPLOAD_STATISTIC_URL: `http://localhost:3000/stats`,
-      APP_ID: 186764
-    };
-  }
 }
 
 const InitialState = {
@@ -34,4 +27,10 @@ const QuestionType = {
   ONE_OF_THREE: `one-of-three`
 };
 
-export {InitialState, Result, GameSettings, QuestionType};
+const BackendSettings = {
+  GET_QUESTIONS_URL: `http://localhost:3000/questions`,
+  UPLOAD_STATISTIC_URL: `http://localhost:3000/stats`,
+  APP_ID: 186764
+};
+
+export {InitialState, Result, GameSettings, QuestionType, BackendSettings};

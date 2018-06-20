@@ -1,4 +1,4 @@
-import {BackendSettings} from "./configuration";
+import {BackendSettings} from "./config";
 
 export default class Backend {
   toJSON(response) {

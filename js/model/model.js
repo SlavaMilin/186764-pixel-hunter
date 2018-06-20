@@ -1,4 +1,4 @@
-import {GameSettings, InitialState, QuestionType, Result} from "../util/configuration";
+import {GameSettings, InitialState, QuestionType, Result} from "../util/config";
 
 export default class Model {
   constructor() {

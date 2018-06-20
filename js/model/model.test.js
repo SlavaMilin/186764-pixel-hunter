@@ -1,6 +1,6 @@
 import {assert} from "chai";
 import Model from "./model";
-import {InitialState} from "../util/configuration";
+import {InitialState} from "../util/config";
 
 const firstAnswer = [2];
 const secondAnswer = [`painting`, `photo`];

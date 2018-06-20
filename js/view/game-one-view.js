@@ -3,7 +3,7 @@ import AbstractView from "./abstract-view";
 export default class GameOneView extends AbstractView {
   constructor(state) {
     super();
-    this.state = state;
+    this._state = state;
   }
 
   get template() {

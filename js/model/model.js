@@ -1,8 +1,7 @@
-import Configuration, {GameSettings, InitialState, QuestionType, Result} from "../util/configuration";
+import {GameSettings, InitialState, QuestionType, Result} from "../util/configuration";
 
 export default class Model {
   constructor() {
-    this._configuration = new Configuration();
     this._state = Object.assign({}, InitialState);
     this._data = [];
   }

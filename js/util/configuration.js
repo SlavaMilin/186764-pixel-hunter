@@ -1,6 +1,3 @@
-export default class Configuration {
-}
-
 const InitialState = {
   lives: 3,
   time: 30,

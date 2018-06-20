@@ -1,12 +1,5 @@
 export default class Configuration {
   constructor() {
-    this.InitialState = {
-      lives: 3,
-      time: 30,
-      level: 0,
-      statistic: []
-    };
-
     this.Result = {
       CORRECT: `correct`,
       WRONG: `wrong`,
@@ -33,3 +26,12 @@ export default class Configuration {
     };
   }
 }
+
+const InitialState = {
+  lives: 3,
+  time: 30,
+  level: 0,
+  statistic: []
+};
+
+export {InitialState};

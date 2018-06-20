@@ -1,9 +1,9 @@
-import Configuration from "../util/configuration";
+import Configuration, {InitialState} from "../util/configuration";
 
 export default class Model {
   constructor() {
     this._configuration = new Configuration();
-    this._state = Object.assign({}, this._configuration.InitialState);
+    this._state = Object.assign({}, InitialState);
     this._data = [];
   }
 
@@ -84,7 +84,7 @@ export default class Model {
   }
 
   resetStateToDefault() {
-    this._state = Object.assign({}, this._configuration.InitialState);
+    this._state = Object.assign({}, InitialState);
   }
 
   die() {
@@ -114,11 +114,11 @@ export default class Model {
       }
     }
 
-    if (this.getTimeValue > this._configuration.InitialState.time - this._configuration.GameSettings.FAST_ANSWER) {
+    if (this.getTimeValue > InitialState.time - this._configuration.GameSettings.FAST_ANSWER) {
       fast = true;
     }
 
-    if (this.getTimeValue < this._configuration.InitialState.time - this._configuration.GameSettings.SLOW_ANSWER) {
+    if (this.getTimeValue < InitialState.time - this._configuration.GameSettings.SLOW_ANSWER) {
       slow = true;
     }
 

@@ -162,11 +162,11 @@ describe(`test model`, () => {
   });
 
   it(`should return answer for current game`, () => {
-    assert.deepEqual(model.getCorrectAnswer, [2]);
+    assert.deepEqual(model.getCorrectAnswer(model.getLevelData), [2]);
     model.goNextLevel();
-    assert.deepEqual(model.getCorrectAnswer, [`painting`, `photo`]);
+    assert.deepEqual(model.getCorrectAnswer(model.getLevelData), [`painting`, `photo`]);
     model.goNextLevel();
-    assert.deepEqual(model.getCorrectAnswer, [`photo`]);
+    assert.deepEqual(model.getCorrectAnswer(model.getLevelData), [`photo`]);
     model.resetStateToDefault();
   });
 

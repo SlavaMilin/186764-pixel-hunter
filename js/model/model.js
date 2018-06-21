@@ -1,9 +1,11 @@
-import {GameSettings, InitialState, QuestionType, Result} from "../util/config";
+import {GameSettings, InitialState, Result} from "../util/config";
+import CorrectAnswer from "./CorrectAnswer";
 
 export default class Model {
   constructor() {
     this._state = Object.assign({}, InitialState);
     this._data = [];
+    this.getCorrectAnswer = CorrectAnswer.getCorrectAnswer;
   }
 
   get getState() {
@@ -50,34 +52,6 @@ export default class Model {
     return this._state.statistic;
   }
 
-  get getCorrectAnswer() {
-    let answers = [];
-    switch (this.getCurrentGameType) {
-      case QuestionType.ONE_OF_THREE:
-        for (let i = 0; i < this.getCurrentGameAnswers.length; i++) {
-          const length = this.getCurrentGameAnswers.filter((el) => {
-            return el.type === this.getCurrentGameAnswers[i].type;
-          }).length;
-          if (length === 1) {
-            answers.push(i);
-            break;
-          }
-        }
-        break;
-
-      case QuestionType.TWO_OF_TWO:
-        for (const key of this.getCurrentGameAnswers) {
-          answers.push(key.type);
-        }
-        break;
-
-      case QuestionType.TINDER_LIKE:
-        answers.push(this.getCurrentGameAnswers[0].type);
-        break;
-    }
-    return answers;
-  }
-
   set setData(data) {
     this._data = [...data];
   }
@@ -103,7 +77,7 @@ export default class Model {
     let slow = false;
     let correct = true;
 
-    const correctAnswer = this.getCorrectAnswer;
+    const correctAnswer = this.getCorrectAnswer(this.getLevelData);
 
     for (let i = 0; i < answers.length; i++) {
       if (answers[i] !== correctAnswer[i]) {

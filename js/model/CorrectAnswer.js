@@ -1,4 +1,4 @@
-import {QuestionType} from "../util/config";
+import {GameSettings, InitialState, QuestionType, Result} from "../util/config";
 
 export default class CorrectAnswer {
   static getCorrectAnswer(levelData) {
@@ -27,5 +27,44 @@ export default class CorrectAnswer {
         break;
     }
     return answers;
+  }
+
+  static saveAnswer(answers, correctAnswers, state) {
+    let fast = false;
+    let slow = false;
+    let correct = true;
+
+    for (let i = 0; i < answers.length; i++) {
+      if (answers[i] !== correctAnswers[i]) {
+        correct = false;
+        state.lives -= 1;
+        break;
+      }
+    }
+
+    if (state.time > InitialState.time - GameSettings.FAST_ANSWER) {
+      fast = true;
+    }
+    if (state.time < InitialState.time - GameSettings.SLOW_ANSWER) {
+      slow = true;
+    }
+
+    if (fast && correct) {
+      state.statistic.push(Result.FAST);
+    }
+
+    if (slow && correct) {
+      state.statistic.push(Result.SLOW);
+    }
+
+    if (!fast && !slow && correct) {
+      state.statistic.push(Result.CORRECT);
+    }
+
+    if (correct === false) {
+      state.statistic.push(Result.WRONG);
+    }
+
+    return state;
   }
 }

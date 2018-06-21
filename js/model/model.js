@@ -73,42 +73,6 @@ export default class Model {
   }
 
   saveAnswer(answers) {
-    let fast = false;
-    let slow = false;
-    let correct = true;
-
-    const correctAnswer = this.getCorrectAnswer(this.getLevelData);
-
-    for (let i = 0; i < answers.length; i++) {
-      if (answers[i] !== correctAnswer[i]) {
-        correct = false;
-        this.die();
-        break;
-      }
-    }
-
-    if (this.getTimeValue > InitialState.time - GameSettings.FAST_ANSWER) {
-      fast = true;
-    }
-
-    if (this.getTimeValue < InitialState.time - GameSettings.SLOW_ANSWER) {
-      slow = true;
-    }
-
-    if (fast && correct) {
-      this._state.statistic.push(Result.FAST);
-    }
-
-    if (slow && correct) {
-      this._state.statistic.push(Result.SLOW);
-    }
-
-    if (!fast && !slow && correct) {
-      this._state.statistic.push(Result.CORRECT);
-    }
-
-    if (correct === false) {
-      this._state.statistic.push(Result.WRONG);
-    }
+    this._state = CorrectAnswer.saveAnswer(answers, this.getCorrectAnswer(this.getLevelData), this._state);
   }
 }

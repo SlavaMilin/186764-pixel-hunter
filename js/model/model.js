@@ -1,11 +1,11 @@
-import {GameSettings, InitialState, Result} from "../util/config";
-import CorrectAnswer from "./CorrectAnswer";
+import {GameSettings, InitialState} from "../util/config";
+import Answer from "./Answer";
 
 export default class Model {
   constructor() {
     this._state = Object.assign({}, InitialState);
     this._data = [];
-    this.getCorrectAnswer = CorrectAnswer.getCorrectAnswer;
+    this.getCorrectAnswer = Answer.getCorrectAnswer;
   }
 
   get getState() {
@@ -73,6 +73,6 @@ export default class Model {
   }
 
   saveAnswer(answers) {
-    this._state = CorrectAnswer.saveAnswer(answers, this.getCorrectAnswer(this.getLevelData), this._state);
+    this._state = Answer.saveAnswer(answers, this.getCorrectAnswer(this.getLevelData), this._state);
   }
 }

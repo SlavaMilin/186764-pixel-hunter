@@ -1,6 +1,6 @@
 import {GameSettings, InitialState, QuestionType, Result} from "../util/config";
 
-export default class CorrectAnswer {
+export default class Answer {
   static getCorrectAnswer(levelData) {
     let answers = [];
     switch (levelData.type) {

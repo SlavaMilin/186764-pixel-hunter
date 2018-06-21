@@ -30,6 +30,7 @@ export default class Answer {
   }
 
   static saveAnswer(answers, correctAnswers, state) {
+    let resultState = Object.assign({}, state);
     let fast = false;
     let slow = false;
     let correct = true;
@@ -37,34 +38,34 @@ export default class Answer {
     for (let i = 0; i < answers.length; i++) {
       if (answers[i] !== correctAnswers[i]) {
         correct = false;
-        state.lives -= 1;
+        resultState.lives -= 1;
         break;
       }
     }
 
-    if (state.time > InitialState.time - GameSettings.FAST_ANSWER) {
+    if (resultState.time > InitialState.time - GameSettings.FAST_ANSWER) {
       fast = true;
     }
-    if (state.time < InitialState.time - GameSettings.SLOW_ANSWER) {
+    if (resultState.time < InitialState.time - GameSettings.SLOW_ANSWER) {
       slow = true;
     }
 
     if (fast && correct) {
-      state.statistic.push(Result.FAST);
+      resultState.statistic.push(Result.FAST);
     }
 
     if (slow && correct) {
-      state.statistic.push(Result.SLOW);
+      resultState.statistic.push(Result.SLOW);
     }
 
     if (!fast && !slow && correct) {
-      state.statistic.push(Result.CORRECT);
+      resultState.statistic.push(Result.CORRECT);
     }
 
     if (correct === false) {
-      state.statistic.push(Result.WRONG);
+      resultState.statistic.push(Result.WRONG);
     }
 
-    return state;
+    return resultState;
   }
 }

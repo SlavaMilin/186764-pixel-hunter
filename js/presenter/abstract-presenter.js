@@ -1,12 +1,12 @@
 export default class AbstractPresenter {
   constructor(model) {
     this._model = model;
-    this.root = {};
+    this._template = {};
   }
 
   render() {
     const container = document.querySelector(`.central`);
     container.innerHTML = ``;
-    container.appendChild(this.root);
+    container.appendChild(this._template);
   }
 }

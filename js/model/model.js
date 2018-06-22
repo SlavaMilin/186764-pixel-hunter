@@ -57,17 +57,17 @@ export default class Model {
     this._data = [...data];
   }
 
-  subscribe(subscriber) {
-
-  }
-
-  unsubscribe(subscriber) {
-
-  }
-
-  notifySubscribers() {
-
-  }
+  // subscribe(subscriber) {
+  //
+  // }
+  //
+  // unsubscribe(subscriber) {
+  //
+  // }
+  //
+  // notifySubscribers() {
+  //
+  // }
 
   resetStateToDefault() {
     this._state = Object.assign({}, InitialState);

@@ -3,7 +3,7 @@ import Backend from "util/backend";
 
 
 export default class Application {
-  static showWelcome() {
+  static showRules() {
 
   }
 }

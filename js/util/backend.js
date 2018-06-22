@@ -2,7 +2,7 @@ import {BackendSettings} from "./config";
 
 export default class Backend {
   toJSON(response) {
-    response.json();
+    return response.json();
   }
 
   checkStatus(response) {
@@ -12,11 +12,11 @@ export default class Backend {
     throw new Error(`Произошла ошибка. Статус: ${response.status} ${response.statusText}. Пожалуйста, перезагрузите страницу`);
   }
 
-  static loadData() {
+  loadData() {
     return fetch(BackendSettings.GET_QUESTIONS_URL).then(this.checkStatus).then(this.toJSON);
   }
 
-  static uploadStatistic(data, userName) {
+  uploadStatistic(data, userName) {
     const requestSettings = {
       body: JSON.stringify(data),
       headers: {

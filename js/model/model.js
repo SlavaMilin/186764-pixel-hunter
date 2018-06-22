@@ -5,6 +5,7 @@ export default class Model {
   constructor() {
     this._state = Object.assign({}, InitialState);
     this._data = [];
+    this._subscribers = [];
     this.getCorrectAnswer = Answer.getCorrectAnswer;
   }
 
@@ -54,6 +55,18 @@ export default class Model {
 
   set setData(data) {
     this._data = [...data];
+  }
+
+  subscribe(subscriber) {
+
+  }
+
+  unsubscribe(subscriber) {
+
+  }
+
+  notifySubscribers() {
+
   }
 
   resetStateToDefault() {

@@ -1,9 +1,8 @@
 import AbstractView from "./abstract-view";
 
-export default class Intro extends AbstractView {
-  constructor(state) {
+export default class IntroView extends AbstractView {
+  constructor() {
     super();
-    this._state = state;
   }
 
   get template() {

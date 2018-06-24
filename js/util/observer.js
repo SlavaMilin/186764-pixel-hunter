@@ -11,7 +11,7 @@ export default class Observer {
     this.subscribers = this.subscribers.filter((it) => it !== func);
   }
 
-  notifySubscribers(data) {
-    this.subscribers.forEach((it) => it(data));
+  notifySubscribers(type, data) {
+    this.subscribers.forEach((it) => it(type, data));
   }
 }

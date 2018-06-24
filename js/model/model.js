@@ -93,6 +93,10 @@ export default class Model {
     this._state.level += 1;
   }
 
+  startGame() {
+    this.notifySubscribers(this.getCurrentGameType, this);
+  }
+
   saveAnswer(answers) {
     this._state = Answer.saveAnswer(answers, this.correctAnswer, this._state);
   }

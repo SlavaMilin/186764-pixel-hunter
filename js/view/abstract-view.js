@@ -1,11 +1,12 @@
 import Util from "../util/util";
 
 export default class AbstractView {
-  constructor() {
+  constructor(model) {
     if (new.target === AbstractView) {
       throw new Error(`Can't instantiate AbstractView, only concrete one`);
     }
     this.render = Util.render;
+    this._model = model;
   }
 
   get template() {

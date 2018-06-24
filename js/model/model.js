@@ -58,6 +58,14 @@ export default class Model {
     this._data = [...data];
   }
 
+  addSubscriber(func) {
+    this._subscribers.subscribe(func);
+  }
+
+  notifySubscribers(type, data) {
+    this._subscribers.notifySubscribers(type, data);
+  }
+
   resetStateToDefault() {
     this._state = Object.assign({}, InitialState);
   }

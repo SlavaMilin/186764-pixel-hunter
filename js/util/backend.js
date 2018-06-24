@@ -1,11 +1,8 @@
-import Configuration from "./configuration";
+import {BackendSettings} from "./config";
 
 export default class Backend {
-  constructor() {
-    this.configuration = new Configuration();
-  }
   toJSON(response) {
-    response.json();
+    return response.json();
   }
 
   checkStatus(response) {
@@ -15,11 +12,11 @@ export default class Backend {
     throw new Error(`Произошла ошибка. Статус: ${response.status} ${response.statusText}. Пожалуйста, перезагрузите страницу`);
   }
 
-  static loadData() {
-    return fetch(this.configuration.BackendSettings.GET_QUESTIONS_URL).then(this.checkStatus).then(this.toJSON);
+  loadData() {
+    return fetch(BackendSettings.GET_QUESTIONS_URL).then(this.checkStatus).then(this.toJSON);
   }
 
-  static uploadStatistic(data, userName) {
+  uploadStatistic(data, userName) {
     const requestSettings = {
       body: JSON.stringify(data),
       headers: {
@@ -27,6 +24,6 @@ export default class Backend {
       },
       method: `POST`
     };
-    return fetch(`${this.configuration.BackendSettings}/stats/:${this.constructor.BackendSettings.APP_ID}-:${userName}`, requestSettings).then(this.checkStatus);
+    return fetch(`${BackendSettings}/stats/:${BackendSettings.APP_ID}-:${userName}`, requestSettings).then(this.checkStatus);
   }
 }

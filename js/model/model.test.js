@@ -1,8 +1,6 @@
 import {assert} from "chai";
 import Model from "./model";
-import Configuration from "../util/configuration";
-
-const configuration = new Configuration();
+import {InitialState} from "../util/config";
 
 const firstAnswer = [2];
 const secondAnswer = [`painting`, `photo`];
@@ -97,13 +95,13 @@ describe(`test model`, () => {
   model.setData = testData;
 
   it(`should return state`, () => {
-    assert.deepEqual(model.getState, configuration.InitialState);
+    assert.deepEqual(model.getState, InitialState);
   });
 
   it(`should reset state to default`, () => {
     model.tick();
     model.resetStateToDefault();
-    assert.deepEqual(model.getState, configuration.InitialState);
+    assert.deepEqual(model.getState, InitialState);
   });
 
   it(`should return screen value`, () => {
@@ -164,11 +162,11 @@ describe(`test model`, () => {
   });
 
   it(`should return answer for current game`, () => {
-    assert.deepEqual(model.getCorrectAnswer, [2]);
+    assert.deepEqual(model.getCorrectAnswer(model.getLevelData), [2]);
     model.goNextLevel();
-    assert.deepEqual(model.getCorrectAnswer, [`painting`, `photo`]);
+    assert.deepEqual(model.getCorrectAnswer(model.getLevelData), [`painting`, `photo`]);
     model.goNextLevel();
-    assert.deepEqual(model.getCorrectAnswer, [`photo`]);
+    assert.deepEqual(model.getCorrectAnswer(model.getLevelData), [`photo`]);
     model.resetStateToDefault();
   });
 

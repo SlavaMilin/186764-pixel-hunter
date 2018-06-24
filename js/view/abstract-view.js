@@ -1,6 +1,6 @@
 import Util from "../util/util";
 
-class AbstractView {
+export default class AbstractView {
   constructor() {
     if (new.target === AbstractView) {
       throw new Error(`Can't instantiate AbstractView, only concrete one`);
@@ -16,7 +16,7 @@ class AbstractView {
     if (this._element) {
       return this._element;
     }
-    this._element = this.render();
+    this._element = this.render(this.template);
     this.bind(this._element);
     return this._element;
   }
@@ -26,5 +26,3 @@ class AbstractView {
   }
 
 }
-
-export default AbstractView;

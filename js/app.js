@@ -32,9 +32,11 @@ export default class App {
     model.addSubscriber(this.gameSelecter);
     const backend = new Backend();
     const intro = new IntroPresenter(model);
-    intro.render();
+
     backend.loadData().then((data) => {
       model.data = data;
+    }).then(() => {
+      intro.render();
     });
   }
 

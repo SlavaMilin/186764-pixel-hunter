@@ -7,7 +7,6 @@ export default class Model {
     this._state = Object.assign({}, InitialState);
     this._data = [];
     this._subscribers = new Observer();
-    this.getCorrectAnswer = Answer.getCorrectAnswer;
   }
 
   get getState() {
@@ -58,6 +57,10 @@ export default class Model {
     return this._state.name;
   }
 
+  get correctAnswer() {
+    return Answer.getCorrectAnswer(this.getLevelData);
+  }
+
   set setData(data) {
     this._data = [...data];
   }
@@ -91,6 +94,6 @@ export default class Model {
   }
 
   saveAnswer(answers) {
-    this._state = Answer.saveAnswer(answers, this.getCorrectAnswer(this.getLevelData), this._state);
+    this._state = Answer.saveAnswer(answers, this.correctAnswer, this._state);
   }
 }

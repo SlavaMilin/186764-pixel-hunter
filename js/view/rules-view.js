@@ -47,6 +47,18 @@ export default class RulesView extends AbstractView {
   onAnswer() {}
 
   bind() {
+    const btn = this._element.querySelector(`.rules__button`);
+    const nameInput = this._element.querySelector(`.rules__input`);
+    let value = ``;
 
+    nameInput.addEventListener(`input`, (evt) => {
+      value = evt.target.value;
+      btn.disabled = !value.length;
+    });
+
+    btn.addEventListener(`click`, (evt) => {
+      evt.preventDefault();
+      this.onAnswer(value);
+    });
   }
 }

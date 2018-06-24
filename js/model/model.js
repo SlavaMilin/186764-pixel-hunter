@@ -21,36 +21,36 @@ export default class Model {
     return this._state.time;
   }
 
-  get isLose() {
-    return this._state.lives < 1 || this._state.time < 1;
-  }
-
   get livesValue() {
     return this._state.lives;
   }
 
-  get isLittleTime() {
-    return this._state.time < GameSettings.LITTLE_TIME;
+  get statistic() {
+    return this._state.statistic;
+  }
+
+  get name() {
+    return this._state.name;
   }
 
   get levelData() {
     return this._data[this._state.level];
   }
 
-  get isMoreGameScreen() {
-    return this._state.level < this._data.length;
-  }
-
   get currentGameType() {
     return this.levelData[`type`];
   }
 
-  get getStatistic() {
-    return this._state.statistic;
+  get isLittleTime() {
+    return this._state.time < GameSettings.LITTLE_TIME;
   }
 
-  get name() {
-    return this._state.name;
+  get isLose() {
+    return this._state.lives < 1 || this._state.time < 1;
+  }
+
+  get isMoreGameScreen() {
+    return this._state.level < this._data.length;
   }
 
   get correctAnswer() {
@@ -94,6 +94,6 @@ export default class Model {
   }
 
   saveAnswer(answers) {
-    this._state = Answer.saveAnswer(answers, this.correctAnswer, this._state);
+    this._state = Answer.saveAnswer(answers, this.correctAnswer, this.state);
   }
 }

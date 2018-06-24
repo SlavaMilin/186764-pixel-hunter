@@ -192,7 +192,7 @@ describe(`test model`, () => {
 
       model.saveAnswer(fourthAnswer);
 
-      assert.deepEqual(model.getStatistic, [`fast`, `slow`, `correct`, `wrong`]);
+      assert.deepEqual(model.statistic, [`fast`, `slow`, `correct`, `wrong`]);
     });
 
     it(`should correct check rest lives`, () => {

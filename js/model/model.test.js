@@ -92,46 +92,46 @@ const testData = [
 
 describe(`test model`, () => {
   const model = new Model();
-  model.setData = testData;
+  model.data = testData;
 
   it(`should return state`, () => {
-    assert.deepEqual(model.getState, InitialState);
+    assert.deepEqual(model.state, InitialState);
   });
 
   it(`should reset state to default`, () => {
     model.tick();
     model.resetStateToDefault();
-    assert.deepEqual(model.getState, InitialState);
+    assert.deepEqual(model.state, InitialState);
   });
 
   it(`should return screen value`, () => {
-    assert.equal(model.getScreenValue, 0);
+    assert.equal(model.levelValue, 0);
   });
 
   it(`should increase screen number by 1`, () => {
-    assert.equal(model.getScreenValue, 0);
+    assert.equal(model.levelValue, 0);
     model.goNextLevel();
-    assert.equal(model.getScreenValue, 1);
+    assert.equal(model.levelValue, 1);
   });
 
   it(`should return current time`, () => {
-    assert.equal(model.getTimeValue, 30);
+    assert.equal(model.timeValue, 30);
   });
 
   it(`should decrease time by 1`, () => {
-    assert.equal(model.getTimeValue, 30);
+    assert.equal(model.timeValue, 30);
     model.tick();
-    assert.equal(model.getTimeValue, 29);
+    assert.equal(model.timeValue, 29);
   });
 
   it(`should get errors value`, () => {
-    assert.equal(model.getLives, 3);
+    assert.equal(model.livesValue, 3);
   });
 
   it(`should subtract live`, () => {
-    assert.equal(model.getLives, 3);
+    assert.equal(model.livesValue, 3);
     model.die();
-    assert.equal(model.getLives, 2);
+    assert.equal(model.livesValue, 2);
   });
 
   it(`should check is game lose`, () => {
@@ -151,7 +151,7 @@ describe(`test model`, () => {
   });
 
   it(`should return level data`, () => {
-    assert.deepEqual(model.getLevelData, testData[0]);
+    assert.deepEqual(model.levelData, testData[0]);
   });
 
   it(`should check is it more game screen`, () => {
@@ -196,7 +196,7 @@ describe(`test model`, () => {
     });
 
     it(`should correct check rest lives`, () => {
-      assert.equal(model.getLives, 2);
+      assert.equal(model.livesValue, 2);
     });
 
     model.resetStateToDefault();

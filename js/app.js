@@ -34,7 +34,7 @@ export default class App {
     const intro = new IntroPresenter(model);
     intro.render();
     backend.loadData().then((data) => {
-      model.setData = data;
+      model.data = data;
     });
   }
 

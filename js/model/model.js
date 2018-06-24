@@ -9,15 +9,15 @@ export default class Model {
     this._subscribers = new Observer();
   }
 
-  get getState() {
+  get state() {
     return this._state;
   }
 
-  get getScreenValue() {
+  get levelValue() {
     return this._state.level;
   }
 
-  get getTimeValue() {
+  get timeValue() {
     return this._state.time;
   }
 
@@ -25,7 +25,7 @@ export default class Model {
     return this._state.lives < 1 || this._state.time < 1;
   }
 
-  get getLives() {
+  get livesValue() {
     return this._state.lives;
   }
 
@@ -33,7 +33,7 @@ export default class Model {
     return this._state.time < GameSettings.LITTLE_TIME;
   }
 
-  get getLevelData() {
+  get levelData() {
     return this._data[this._state.level];
   }
 
@@ -41,12 +41,8 @@ export default class Model {
     return this._state.level < this._data.length;
   }
 
-  get getCurrentGameType() {
-    return this.getLevelData[`type`];
-  }
-
-  get getCurrentGameAnswers() {
-    return this.getLevelData[`answers`];
+  get currentGameType() {
+    return this.levelData[`type`];
   }
 
   get getStatistic() {
@@ -58,10 +54,10 @@ export default class Model {
   }
 
   get correctAnswer() {
-    return Answer.getCorrectAnswer(this.getLevelData);
+    return Answer.getCorrectAnswer(this.levelData);
   }
 
-  set setData(data) {
+  set data(data) {
     this._data = [...data];
   }
 
@@ -94,7 +90,7 @@ export default class Model {
   }
 
   startGame() {
-    this.notifySubscribers(this.getCurrentGameType, this);
+    this.notifySubscribers(this.currentGameType, this);
   }
 
   saveAnswer(answers) {

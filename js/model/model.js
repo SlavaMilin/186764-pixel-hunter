@@ -1,11 +1,12 @@
 import {GameSettings, InitialState} from "../util/config";
 import Answer from "./Answer";
+import Observer from "../util/observer";
 
 export default class Model {
   constructor() {
     this._state = Object.assign({}, InitialState);
     this._data = [];
-    this._subscribers = [];
+    this._subscribers = new Observer();
     this.getCorrectAnswer = Answer.getCorrectAnswer;
   }
 

@@ -1,6 +1,6 @@
 import AbstractView from "./abstract-view";
 
-export default class Greeting extends AbstractView {
+export default class GreetingView extends AbstractView {
   constructor(state) {
     super();
     this._state = state;

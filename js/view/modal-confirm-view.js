@@ -1,6 +1,6 @@
 import AbstractView from "./abstract-view";
 
-export default class ModalConfirm extends AbstractView {
+export default class ModalConfirmView extends AbstractView {
   constructor(state) {
     super();
     this._state = state;

@@ -1,6 +1,6 @@
 import AbstractView from "./abstract-view";
 
-export default class ModalError extends AbstractView {
+export default class ModalErrorView extends AbstractView {
   constructor(state) {
     super();
     this._state = state;

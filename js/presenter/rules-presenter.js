@@ -1,10 +1,10 @@
 import AbstractPresenter from "./abstract-presenter";
-import Rules from "../view/rules";
+import RulesView from "../view/rules-view";
 
 export default class RulesPresenter extends AbstractPresenter {
   constructor(model) {
     super(model);
-    this._view = new Rules();
+    this._view = new RulesView();
     this._element = this._view.element;
   }
 }

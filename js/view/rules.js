@@ -1,9 +1,8 @@
 import AbstractView from "./abstract-view";
 
 export default class Rules extends AbstractView {
-  constructor(state) {
-    super();
-    this._state = state;
+  constructor(model) {
+    super(model);
   }
 
   get template() {

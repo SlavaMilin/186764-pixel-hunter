@@ -1,10 +1,10 @@
-import {GameSettings, InitialState, QuestionType, Result} from "../util/config";
+import {GameSettings, InitialState, GameType, Result} from "../util/config";
 
 export default class Answer {
   static getCorrectAnswer(levelData) {
     let answers = [];
     switch (levelData.type) {
-      case QuestionType.ONE_OF_THREE:
+      case GameType.ONE_OF_THREE:
         for (let i = 0; i < levelData.answers.length; i++) {
           const length = levelData.answers.filter((el) => {
             return el.type === levelData.answers[i].type;
@@ -16,13 +16,13 @@ export default class Answer {
         }
         break;
 
-      case QuestionType.TWO_OF_TWO:
+      case GameType.TWO_OF_TWO:
         for (const key of levelData.answers) {
           answers.push(key.type);
         }
         break;
 
-      case QuestionType.TINDER_LIKE:
+      case GameType.TINDER_LIKE:
         answers.push(levelData.answers[0].type);
         break;
     }

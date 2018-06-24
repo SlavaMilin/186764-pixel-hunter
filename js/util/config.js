@@ -18,7 +18,7 @@ const GameSettings = {
   LITTLE_TIME: 5
 };
 
-const QuestionType = {
+const GameType = {
   TWO_OF_TWO: `two-of-two`,
   TINDER_LIKE: `tinder-like`,
   ONE_OF_THREE: `one-of-three`
@@ -30,4 +30,4 @@ const BackendSettings = {
   APP_ID: 186764
 };
 
-export {InitialState, Result, GameSettings, QuestionType, BackendSettings};
+export {InitialState, Result, GameSettings, GameType, BackendSettings};

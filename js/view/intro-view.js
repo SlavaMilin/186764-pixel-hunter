@@ -1,8 +1,8 @@
 import AbstractView from "./abstract-view";
 
 export default class IntroView extends AbstractView {
-  constructor() {
-    super();
+  constructor(model) {
+    super(model);
   }
 
   get template() {
@@ -28,6 +28,9 @@ export default class IntroView extends AbstractView {
   onAnswer() {}
 
   bind() {
-
+    const btn = this._element.querySelector(`.intro__asterisk`);
+    btn.addEventListener(`click`, () => {
+      this.onAnswer();
+    });
   }
 }

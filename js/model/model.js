@@ -54,8 +54,16 @@ export default class Model {
     return this._state.statistic;
   }
 
+  get name() {
+    return this._state.name;
+  }
+
   set setData(data) {
     this._data = [...data];
+  }
+
+  set name(name) {
+    this._state.name = name;
   }
 
   addSubscriber(func) {

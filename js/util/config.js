@@ -2,6 +2,7 @@ const InitialState = {
   lives: 3,
   time: 30,
   level: 0,
+  name: ``,
   statistic: []
 };
 

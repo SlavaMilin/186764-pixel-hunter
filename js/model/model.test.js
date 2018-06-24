@@ -170,6 +170,13 @@ describe(`test model`, () => {
     model.resetStateToDefault();
   });
 
+  it(`should save name return correct value`, () => {
+    model.name = `Vasia`;
+    assert.equal(model.name, `Vasia`);
+    model.resetStateToDefault();
+    assert.equal(model.name, ``);
+  });
+
   describe(`check game statistic`, () => {
     it(`should check answer, save it to statistic of the game, and remove live if answer is wrong`, () => {
       model.saveAnswer(firstAnswer);

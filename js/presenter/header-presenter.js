@@ -7,4 +7,10 @@ export default class HeaderPresenter extends AbstractPresenter {
     this._view = new HeaderView(model);
     this._element = this._view.element;
   }
+
+  render() {
+    const container = document.querySelector(`.central`);
+    const firstChild = container.firstChild;
+    container.insertBefore(this._element, firstChild);
+  }
 }

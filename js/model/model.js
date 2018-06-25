@@ -25,6 +25,10 @@ export default class Model {
     return this._state.lives;
   }
 
+  get initialLivesValue() {
+    return InitialState.lives;
+  }
+
   get statistic() {
     return this._state.statistic;
   }

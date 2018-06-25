@@ -100,7 +100,7 @@ describe(`test model`, () => {
 
   it(`should reset state to default`, () => {
     model.tick();
-    model.resetStateToDefault();
+    model.restartGame();
     assert.deepEqual(model.state, InitialState);
   });
 
@@ -138,10 +138,10 @@ describe(`test model`, () => {
     assert.equal(model.isLose, false);
     model._state.lives = 0;
     assert.equal(model.isLose, true);
-    model.resetStateToDefault();
+    model.restartGame();
     model._state.time = 0;
     assert.equal(model.isLose, true);
-    model.resetStateToDefault();
+    model.restartGame();
   });
 
   it(`should check is it little time`, () => {
@@ -158,7 +158,7 @@ describe(`test model`, () => {
     assert.equal(model.isMoreGameScreen, true);
     model._state.level = 4;
     assert.equal(model.isMoreGameScreen, false);
-    model.resetStateToDefault();
+    model.restartGame();
   });
 
   it(`should return answer for current game`, () => {
@@ -167,13 +167,13 @@ describe(`test model`, () => {
     assert.deepEqual(model.correctAnswer, [`painting`, `photo`]);
     model.goNextLevel();
     assert.deepEqual(model.correctAnswer, [`photo`]);
-    model.resetStateToDefault();
+    model.restartGame();
   });
 
   it(`should save name return correct value`, () => {
     model.name = `Vasia`;
     assert.equal(model.name, `Vasia`);
-    model.resetStateToDefault();
+    model.restartGame();
     assert.equal(model.name, ``);
   });
 
@@ -199,6 +199,6 @@ describe(`test model`, () => {
       assert.equal(model.livesValue, 2);
     });
 
-    model.resetStateToDefault();
+    model.restartGame();
   });
 });

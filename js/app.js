@@ -6,6 +6,7 @@ import GameThreePresenter from "./presenter/game-three-presenter";
 import GameTwoPresenter from "./presenter/game-two-presenter";
 import GameOnePresenter from "./presenter/game-one-presenter";
 import RulesPresenter from "./presenter/rules-presenter";
+import HeaderPresenter from "./presenter/header-presenter";
 
 
 export default class App {
@@ -41,23 +42,29 @@ export default class App {
   }
 
   static showRules(model) {
-    const presenter = new RulesPresenter(model);
-    presenter.render();
+    const rules = new RulesPresenter(model);
+    rules.render();
   }
 
   static showGameThree(model) {
-    const presenter = new GameThreePresenter(model);
-    presenter.render();
+    const gameThree = new GameThreePresenter(model);
+    const header = new HeaderPresenter(model);
+    gameThree.render();
+    header.render();
   }
 
   static showGameTwo(model) {
-    const presenter = new GameTwoPresenter(model);
-    presenter.render();
+    const gameTwo = new GameTwoPresenter(model);
+    const header = new HeaderPresenter(model);
+    gameTwo.render();
+    header.render();
   }
 
   static showGameOne(model) {
-    const presenter = new GameOnePresenter(model);
-    presenter.render();
+    const gameOne = new GameOnePresenter(model);
+    const header = new HeaderPresenter(model);
+    gameOne.render();
+    header.render();
   }
 }
 

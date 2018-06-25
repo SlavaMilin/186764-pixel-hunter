@@ -26,6 +26,10 @@ export default class App {
     if (type === GameType.RULES) {
       App.showRules(model);
     }
+
+    if (type === GameType.RESTART) {
+      App.showRules(model);
+    }
   }
 
   showIntro() {

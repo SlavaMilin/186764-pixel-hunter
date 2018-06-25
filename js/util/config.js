@@ -25,7 +25,8 @@ const GameType = {
   ONE_OF_THREE: `one-of-three`,
   RULES: `rules`,
   LOOSE: `loose`,
-  WIN: `win`
+  WIN: `win`,
+  RESTART: `restart`
 };
 
 const BackendSettings = {

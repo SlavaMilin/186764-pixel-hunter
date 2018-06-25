@@ -7,6 +7,8 @@ export default class AbstractView {
     }
     this.render = Util.render;
     this._model = model;
+    this._data = model.levelData;
+    this._state = model.state;
   }
 
   get template() {

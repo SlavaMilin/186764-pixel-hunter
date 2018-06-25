@@ -1,4 +1,4 @@
-import {GameSettings, InitialState} from "../util/config";
+import {GameSettings, InitialState, GameType} from "../util/config";
 import Answer from "./Answer";
 import Observer from "../util/observer";
 
@@ -77,8 +77,9 @@ export default class Model {
     this._subscribers.notifySubscribers(type, data);
   }
 
-  resetStateToDefault() {
+  restartGame() {
     this._state = Object.assign({}, InitialState);
+    this.notifySubscribers(GameType.RESTART, this);
   }
 
   die() {

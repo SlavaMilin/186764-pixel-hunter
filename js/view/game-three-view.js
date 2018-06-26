@@ -10,15 +10,11 @@ export default class GameThreeView extends AbstractView {
 <div class="game">
   <p class="game__task">Найдите рисунок среди изображений</p>
   <form class="game__content  game__content--triple">
+    ${Array(this._data.answers.length).fill(``).map((it, i) => (`
     <div class="game__option">
-      <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
+      <img src="${this._data.answers[i].image.url}" alt="Option ${i}" width="${this._data.answers[i].image.width}" height="${this._data.answers[i].image.height}">
     </div>
-    <div class="game__option  game__option--selected">
-      <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
-    </div>
-    <div class="game__option">
-      <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
-    </div>
+    `)).join(``)}
   </form>
   <div class="stats">
     <ul class="stats">

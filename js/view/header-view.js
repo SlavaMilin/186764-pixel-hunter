@@ -25,8 +25,8 @@ export default class HeaderView extends AbstractView {
 
   onRestartClick() {}
 
-  bind() {
-    const btn = this._element.querySelector(`.back`);
+  bind(element) {
+    const btn = element.querySelector(`.back`);
     btn.addEventListener(`click`, () => {
       this.onRestartClick();
     });

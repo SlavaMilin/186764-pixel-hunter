@@ -29,43 +29,42 @@ export default class Answer {
     return answers;
   }
 
-  static saveAnswer(answers, correctAnswers, state) {
-    let resultState = Object.assign({}, state);
+  static checkAnswer(answers, correctAnswers, time) {
     let fast = false;
     let slow = false;
     let correct = true;
+    let result = ``;
 
     for (let i = 0; i < answers.length; i++) {
       if (answers[i] !== correctAnswers[i]) {
         correct = false;
-        resultState.lives -= 1;
         break;
       }
     }
 
-    if (resultState.time > InitialState.time - GameSettings.FAST_ANSWER) {
+    if (time > InitialState.time - GameSettings.FAST_ANSWER) {
       fast = true;
     }
-    if (resultState.time < InitialState.time - GameSettings.SLOW_ANSWER) {
+    if (time < InitialState.time - GameSettings.SLOW_ANSWER) {
       slow = true;
     }
 
     if (fast && correct) {
-      resultState.statistic.push(Result.FAST);
+      result = Result.FAST;
     }
 
     if (slow && correct) {
-      resultState.statistic.push(Result.SLOW);
+      result = Result.SLOW;
     }
 
     if (!fast && !slow && correct) {
-      resultState.statistic.push(Result.CORRECT);
+      result = Result.CORRECT;
     }
 
     if (correct === false) {
-      resultState.statistic.push(Result.WRONG);
+      result = Result.WRONG;
     }
 
-    return resultState;
+    return result;
   }
 }

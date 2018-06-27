@@ -99,8 +99,8 @@ describe(`test model`, () => {
   });
 
   it(`should reset state to default`, () => {
-    model.tick();
-    model.restartGame();
+    model._state.time -= 1;
+    model.resetState();
     assert.deepEqual(model.state, InitialState);
   });
 
@@ -118,12 +118,6 @@ describe(`test model`, () => {
     assert.equal(model.timeValue, 30);
   });
 
-  it(`should decrease time by 1`, () => {
-    assert.equal(model.timeValue, 30);
-    model.tick();
-    assert.equal(model.timeValue, 29);
-  });
-
   it(`should get errors value`, () => {
     assert.equal(model.livesValue, 3);
   });
@@ -138,10 +132,10 @@ describe(`test model`, () => {
     assert.equal(model.isLose, false);
     model._state.lives = 0;
     assert.equal(model.isLose, true);
-    model.restartGame();
+    model.resetState();
     model._state.time = 0;
     assert.equal(model.isLose, true);
-    model.restartGame();
+    model.resetState();
   });
 
   it(`should check is it little time`, () => {
@@ -154,11 +148,15 @@ describe(`test model`, () => {
     assert.deepEqual(model.levelData, testData[0]);
   });
 
+  it(`should return number of screen from data`, () => {
+    assert.equal(model.dataScreenValue, 4);
+  });
+
   it(`should check is it more game screen`, () => {
     assert.equal(model.isMoreGameScreen, true);
     model._state.level = 4;
     assert.equal(model.isMoreGameScreen, false);
-    model.restartGame();
+    model.resetState();
   });
 
   it(`should return answer for current game`, () => {
@@ -167,13 +165,13 @@ describe(`test model`, () => {
     assert.deepEqual(model.correctAnswer, [`painting`, `photo`]);
     model.goNextLevel();
     assert.deepEqual(model.correctAnswer, [`photo`]);
-    model.restartGame();
+    model.resetState();
   });
 
   it(`should save name return correct value`, () => {
     model.name = `Vasia`;
     assert.equal(model.name, `Vasia`);
-    model.restartGame();
+    model.resetState();
     assert.equal(model.name, ``);
   });
 
@@ -181,18 +179,18 @@ describe(`test model`, () => {
     it(`should match answer & correct answer & time and return result for statistic`, () => {
       assert.equal(model.checkAnswer(firstAnswer, model.correctAnswer, model.timeValue), `fast`);
 
-      model._state.time = 3;
       model.goNextLevel();
+      model._state.time = 3;
       assert.equal(model.checkAnswer(secondAnswer, model.correctAnswer, model.timeValue), `slow`);
 
-      model._state.time = 15;
       model.goNextLevel();
+      model._state.time = 15;
       assert.equal(model.checkAnswer(thirdAnswer, model.correctAnswer, model.timeValue), `correct`);
 
       model.goNextLevel();
       assert.equal(model.checkAnswer(fourthAnswer, model.correctAnswer, model.timeValue), `wrong`);
 
-      model.restartGame();
+      model.resetState();
     });
   });
 });

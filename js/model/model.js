@@ -73,6 +73,10 @@ export default class Model {
     return Answer.getCorrectAnswer(this.levelData);
   }
 
+  get dataScreenValue() {
+    return this._data.length;
+  }
+
   set data(data) {
     this._data = [...data];
   }
@@ -97,8 +101,12 @@ export default class Model {
     this._subscribers.notifySubscribers(type, data);
   }
 
-  restartGame() {
+  resetState() {
     this._state = Object.assign({}, InitialState);
+  }
+
+  restartGame() {
+    this.resetState();
     this.stopTimer();
     this.notifySubscribers(GameType.RESTART, this);
   }

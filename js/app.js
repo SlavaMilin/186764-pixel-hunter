@@ -30,6 +30,14 @@ export default class App {
     if (type === GameType.RESTART) {
       App.showRules(model);
     }
+
+    if (type === GameType.LOOSE) {
+      App.showLoose(model);
+    }
+
+    if (type === GameType.WIN) {
+      App.showWin(model);
+    }
   }
 
   showIntro() {
@@ -69,6 +77,14 @@ export default class App {
     const header = new HeaderPresenter(model);
     gameOne.render();
     header.render();
+  }
+
+  static showLoose(model) {
+
+  }
+
+  static showWin(model) {
+
   }
 }
 

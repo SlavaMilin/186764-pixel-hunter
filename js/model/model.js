@@ -1,12 +1,24 @@
-import {GameSettings, InitialState, GameType} from "../util/config";
+import {GameSettings, InitialState, GameType, Result} from "../util/config";
 import Answer from "./Answer";
 import Observer from "../util/observer";
+import Util from "../util/util";
 
 export default class Model {
   constructor() {
     this._state = Object.assign({}, InitialState);
     this._data = [];
     this._subscribers = new Observer();
+    this.checkAnswer = Answer.checkAnswer;
+    this.tick = () => {
+      if (this.timeValue > 0) {
+        this._state.time -= 1;
+        Util.updateTimer(this.timeValue);
+      }
+      if (this.timeValue === 0) {
+        this.die();
+        this.goNextLevel();
+      }
+    };
   }
 
   get state() {
@@ -69,6 +81,14 @@ export default class Model {
     this._state.name = name;
   }
 
+  resetTimer() {
+    this._state.time = InitialState.time;
+  }
+
+  stopTimer() {
+    window.clearInterval(this._intervalId);
+  }
+
   addSubscriber(func) {
     this._subscribers.subscribe(func);
   }
@@ -79,6 +99,7 @@ export default class Model {
 
   restartGame() {
     this._state = Object.assign({}, InitialState);
+    this.stopTimer();
     this.notifySubscribers(GameType.RESTART, this);
   }
 
@@ -86,19 +107,32 @@ export default class Model {
     this._state.lives -= 1;
   }
 
-  tick() {
-    this._state.time -= 1;
-  }
-
   goNextLevel() {
     this._state.level += 1;
+    this.resetTimer();
+
+    if (!this.isMoreGameScreen) {
+      return this.notifySubscribers(GameType.WIN, this);
+    }
+
+    if (this.isLose) {
+      return this.notifySubscribers(GameType.LOOSE, this);
+    }
+
+    return this.notifySubscribers(this.currentGameType, this);
   }
 
   startGame() {
     this.notifySubscribers(this.currentGameType, this);
+    this._intervalId = window.setInterval(this.tick, 1000);
   }
 
   saveAnswer(answers) {
-    this._state = Answer.saveAnswer(answers, this.correctAnswer, this.state);
+    const answer = this.checkAnswer(answers, this.correctAnswer, this.timeValue);
+    if (answer === Result.WRONG) {
+      this.die();
+    }
+    this._state.statistic.push(answer);
+    this.goNextLevel();
   }
 }

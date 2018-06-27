@@ -1,4 +1,5 @@
 import AbstractView from "./abstract-view";
+import {AnswerType} from "../util/config";
 
 export default class GameTwoView extends AbstractView {
   constructor(model) {
@@ -7,18 +8,18 @@ export default class GameTwoView extends AbstractView {
 
   get template() {
     return `
-<div class="game">
+<div class="game" data-answer="${this._model.correctAnswer}">
   <p class="game__task">Угадайте для каждого изображения фото или рисунок?</p>
   <form class="game__content">
     ${Array(this._data.answers.length).fill(``).map((it, i) => (`
     <div class="game__option">
         <img src="${this._data.answers[i].image.url}" alt="Option ${i}" width="${this._data.answers[i].image.width}" height="${this._data.answers[i].image.height}">
       <label class="game__answer game__answer--photo">
-        <input name="question1" type="radio" value="photo">
+        <input name="question${i}" type="radio" value="photo" data-value="${AnswerType.PHOTO}">
         <span>Фото</span>
       </label>
       <label class="game__answer game__answer--paint">
-        <input name="question1" type="radio" value="paint">
+        <input name="question${i}" type="radio" value="paint" data-value="${AnswerType.PAINTING}">
         <span>Рисунок</span>
       </label>
     </div>
@@ -54,7 +55,16 @@ export default class GameTwoView extends AbstractView {
 
   onAnswer() {}
 
-  bind() {
-
+  bind(element) {
+    element.querySelector(`.game__content`).addEventListener(`change`, () => {
+      const inputs = document.querySelectorAll(`input:checked`);
+      if (inputs.length === 2) {
+        const result = [];
+        for (const key of inputs) {
+          result.push(key.dataset.value);
+        }
+        this.onAnswer(result);
+      }
+    });
   }
 }

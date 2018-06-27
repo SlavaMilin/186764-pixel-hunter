@@ -1,4 +1,5 @@
 import AbstractView from "./abstract-view";
+import {AnswerType} from "../util/config";
 
 export default class GameOneView extends AbstractView {
   constructor(model) {
@@ -7,17 +8,17 @@ export default class GameOneView extends AbstractView {
 
   get template() {
     return `
-<div class="game">
+<div class="game" data-answer="${this._model.correctAnswer}">
   <p class="game__task">Угадай, фото или рисунок?</p>
   <form class="game__content  game__content--wide">
     <div class="game__option">
       <img src="${this._data.answers[0].image.url}" alt="Option 1" width="${this._data.answers[0].image.width}" height="${this._data.answers[0].image.height}">
       <label class="game__answer  game__answer--photo">
-        <input name="question1" type="radio" value="photo">
+        <input name="question1" type="radio" value="photo" data-value="${AnswerType.PHOTO}">
         <span>Фото</span>
       </label>
       <label class="game__answer  game__answer--wide  game__answer--paint">
-        <input name="question1" type="radio" value="paint">
+        <input name="question1" type="radio" value="paint" data-value="${AnswerType.PAINTING}">
         <span>Рисунок</span>
       </label>
     </div>
@@ -52,7 +53,11 @@ export default class GameOneView extends AbstractView {
 
   onAnswer() {}
 
-  bind() {
-
+  bind(element) {
+    element.querySelector(`.game__content`).addEventListener(`click`, (evt) => {
+      if (evt.target.dataset.value) {
+        this.onAnswer([evt.target.dataset.value]);
+      }
+    });
   }
 }

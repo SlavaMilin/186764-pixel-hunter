@@ -7,11 +7,11 @@ export default class GameThreeView extends AbstractView {
 
   get template() {
     return `
-<div class="game">
+<div class="game"  data-answer="${this._model.correctAnswer}">
   <p class="game__task">Найдите рисунок среди изображений</p>
   <form class="game__content  game__content--triple">
     ${Array(this._data.answers.length).fill(``).map((it, i) => (`
-    <div class="game__option">
+    <div class="game__option" data-index="${i}">
       <img src="${this._data.answers[i].image.url}" alt="Option ${i}" width="${this._data.answers[i].image.width}" height="${this._data.answers[i].image.height}">
     </div>
     `)).join(``)}
@@ -46,7 +46,12 @@ export default class GameThreeView extends AbstractView {
 
   onAnswer() {}
 
-  bind() {
-
+  bind(element) {
+    const form = element.querySelector(`.game__content`);
+    form.addEventListener(`click`, (evt) => {
+      if (evt.target.className === `game__option`) {
+        this.onAnswer([Number(evt.target.dataset.index)]);
+      }
+    });
   }
 }

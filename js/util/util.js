@@ -4,4 +4,8 @@ export default class Util {
     element.innerHTML = html.trim();
     return element.content;
   }
+
+  static updateTimer(time) {
+    document.querySelector(`.game__timer`).innerText = time;
+  }
 }

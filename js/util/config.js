@@ -29,10 +29,15 @@ const GameType = {
   RESTART: `restart`
 };
 
+const AnswerType = {
+  PAINTING: `painting`,
+  PHOTO: `photo`
+};
+
 const BackendSettings = {
   GET_QUESTIONS_URL: `https://es.dump.academy/pixel-hunter/questions`,
   UPLOAD_STATISTIC_URL: `http://localhost:3000/stats`,
   APP_ID: 186764
 };
 
-export {InitialState, Result, GameSettings, GameType, BackendSettings};
+export {InitialState, Result, GameSettings, GameType, BackendSettings, AnswerType};

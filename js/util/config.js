@@ -3,6 +3,7 @@ const InitialState = {
   time: 30,
   level: 0,
   name: ``,
+  gameResult: ``,
   statistic: []
 };
 
@@ -10,13 +11,26 @@ const Result = {
   CORRECT: `correct`,
   WRONG: `wrong`,
   FAST: `fast`,
-  SLOW: `slow`
+  SLOW: `slow`,
+};
+
+const GameResult = {
+  WIN: `Победа!`,
+  LOOSE: `Fail`
+};
+
+const ScoreSettings = {
+  FAST_BONUS: 50,
+  SLOW_PENALTY: -50,
+  LIVE_BONUS: 50,
+  CORRECT_ANSWER: 100
 };
 
 const GameSettings = {
   FAST_ANSWER: 10,
   SLOW_ANSWER: 20,
-  LITTLE_TIME: 5
+  LITTLE_TIME: 5,
+  TOTAL_SCREEN: 10
 };
 
 const GameType = {
@@ -24,8 +38,7 @@ const GameType = {
   TINDER_LIKE: `tinder-like`,
   ONE_OF_THREE: `one-of-three`,
   RULES: `rules`,
-  LOOSE: `loose`,
-  WIN: `win`,
+  FINISH: `finish`,
   RESTART: `restart`
 };
 
@@ -40,4 +53,4 @@ const BackendSettings = {
   APP_ID: 186764
 };
 
-export {InitialState, Result, GameSettings, GameType, BackendSettings, AnswerType};
+export {InitialState, Result, GameSettings, GameType, BackendSettings, AnswerType, GameResult, ScoreSettings};

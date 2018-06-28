@@ -7,6 +7,7 @@ import GameTwoPresenter from "./presenter/game-two-presenter";
 import GameOnePresenter from "./presenter/game-one-presenter";
 import RulesPresenter from "./presenter/rules-presenter";
 import HeaderPresenter from "./presenter/header-presenter";
+import FinishPresenter from "./presenter/finish-presenter";
 
 
 export default class App {
@@ -31,12 +32,8 @@ export default class App {
       App.showRules(model);
     }
 
-    if (type === GameType.LOOSE) {
-      App.showLoose(model);
-    }
-
-    if (type === GameType.WIN) {
-      App.showWin(model);
+    if (type === GameType.FINISH) {
+      App.showFinish(model);
     }
   }
 
@@ -79,12 +76,9 @@ export default class App {
     header.render();
   }
 
-  static showLoose(model) {
-
-  }
-
-  static showWin(model) {
-
+  static showFinish(model) {
+    const finish = new FinishPresenter(model);
+    finish.render();
   }
 }
 

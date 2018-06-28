@@ -148,10 +148,6 @@ describe(`test model`, () => {
     assert.deepEqual(model.levelData, testData[0]);
   });
 
-  it(`should return number of screen from data`, () => {
-    assert.equal(model.dataScreenValue, 4);
-  });
-
   it(`should check is it more game screen`, () => {
     assert.equal(model.isMoreGameScreen, true);
     model._state.level = 4;

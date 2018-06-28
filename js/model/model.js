@@ -1,5 +1,4 @@
-import {GameSettings, InitialState, GameType, Result} from "../util/config";
-import Answer from "./Answer";
+import {GameSettings, InitialState, GameType, Result, GameResult} from "../util/config";
 import Observer from "../util/observer";
 import Util from "../util/util";
 
@@ -8,7 +7,7 @@ export default class Model {
     this._state = Object.assign({}, InitialState);
     this._data = [];
     this._subscribers = new Observer();
-    this.checkAnswer = Answer.checkAnswer;
+    this.checkAnswer = Util.checkAnswer;
     this.tick = () => {
       if (this.timeValue > 0) {
         this._state.time -= 1;
@@ -70,11 +69,7 @@ export default class Model {
   }
 
   get correctAnswer() {
-    return Answer.getCorrectAnswer(this.levelData);
-  }
-
-  get dataScreenValue() {
-    return this._data.length;
+    return Util.getCorrectAnswer(this.levelData);
   }
 
   set data(data) {
@@ -103,6 +98,7 @@ export default class Model {
 
   resetState() {
     this._state = Object.assign({}, InitialState);
+    this._state.statistic = [];
   }
 
   restartGame() {
@@ -120,11 +116,15 @@ export default class Model {
     this.resetTimer();
 
     if (!this.isMoreGameScreen) {
-      return this.notifySubscribers(GameType.WIN, this);
+      this._state.gameResult = GameResult.WIN;
+      this.stopTimer();
+      return this.notifySubscribers(GameType.FINISH, this);
     }
 
     if (this.isLose) {
-      return this.notifySubscribers(GameType.LOOSE, this);
+      this._state.gameResult = GameResult.LOOSE;
+      this.stopTimer();
+      return this.notifySubscribers(GameType.FINISH, this);
     }
 
     return this.notifySubscribers(this.currentGameType, this);

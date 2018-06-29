@@ -4,7 +4,8 @@ const InitialState = {
   level: 0,
   name: ``,
   gameResult: ``,
-  statistic: []
+  statistic: [],
+  allStatistic: []
 };
 
 const Result = {

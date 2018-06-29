@@ -100,4 +100,17 @@ export default class Util {
       liveValue
     };
   }
+
+  static getStatisticTemplate(statistic) {
+    return `
+<ul class="stats">
+  ${Array(GameSettings.TOTAL_SCREEN).fill(``).map((it, i) => {
+    if (statistic[i]) {
+      return `<li class="stats__result stats__result--${statistic[i]}"></li>`;
+    }
+    return `<li class="stats__result stats__result--unknown"></li>`;
+  }).join(``)}
+</ul>
+    `;
+  }
 }

@@ -2,10 +2,6 @@ import {assert} from "chai";
 import Model from "./model";
 import {InitialState} from "../util/config";
 
-const firstAnswer = [2];
-const secondAnswer = [`painting`, `photo`];
-const thirdAnswer = [`photo`];
-const fourthAnswer = [`painting`];
 
 const testData = [
   {
@@ -100,42 +96,38 @@ describe(`test model`, () => {
 
   it(`should reset state to default`, () => {
     model._state.time -= 1;
-    model.resetState();
+    model._state.gameResult = [{
+      answers: [`slow`, `fast`]
+    }];
+    model._state.statistic = [`slow`, `fast`];
+    model._resetState();
     assert.deepEqual(model.state, InitialState);
   });
 
-  it(`should return screen value`, () => {
-    assert.equal(model.levelValue, 0);
-  });
-
   it(`should increase screen number by 1`, () => {
-    assert.equal(model.levelValue, 0);
-    model.goNextLevel();
-    assert.equal(model.levelValue, 1);
+    assert.equal(model._state.level, 0);
+    model._goNextLevel();
+    assert.equal(model._state.level, 1);
   });
 
   it(`should return current time`, () => {
-    assert.equal(model.timeValue, 30);
-  });
-
-  it(`should get errors value`, () => {
-    assert.equal(model.livesValue, 3);
+    assert.equal(model._timeValue, 30);
   });
 
   it(`should subtract live`, () => {
-    assert.equal(model.livesValue, 3);
-    model.die();
-    assert.equal(model.livesValue, 2);
+    assert.equal(model._state.lives, 3);
+    model._die();
+    assert.equal(model._state.lives, 2);
   });
 
   it(`should check is game lose`, () => {
-    assert.equal(model.isLose, false);
+    assert.equal(model._isLose, false);
     model._state.lives = 0;
-    assert.equal(model.isLose, true);
-    model.resetState();
+    assert.equal(model._isLose, true);
+    model._resetState();
     model._state.time = 0;
-    assert.equal(model.isLose, true);
-    model.resetState();
+    assert.equal(model._isLose, true);
+    model._resetState();
   });
 
   it(`should check is it little time`, () => {
@@ -149,44 +141,43 @@ describe(`test model`, () => {
   });
 
   it(`should check is it more game screen`, () => {
-    assert.equal(model.isMoreGameScreen, true);
+    assert.equal(model._isMoreGameScreen, true);
     model._state.level = 4;
-    assert.equal(model.isMoreGameScreen, false);
-    model.resetState();
+    assert.equal(model._isMoreGameScreen, false);
+    model._resetState();
   });
 
   it(`should return answer for current game`, () => {
     assert.deepEqual(model.correctAnswer, [2]);
-    model.goNextLevel();
+    model._goNextLevel();
     assert.deepEqual(model.correctAnswer, [`painting`, `photo`]);
-    model.goNextLevel();
+    model._goNextLevel();
     assert.deepEqual(model.correctAnswer, [`photo`]);
-    model.resetState();
+    model._resetState();
   });
 
   it(`should save name return correct value`, () => {
     model.name = `Vasia`;
     assert.equal(model.name, `Vasia`);
-    model.resetState();
+    model._resetState();
     assert.equal(model.name, ``);
   });
 
   describe(`check game statistic`, () => {
-    it(`should match answer & correct answer & time and return result for statistic`, () => {
-      assert.equal(model.checkAnswer(firstAnswer, model.correctAnswer, model.timeValue), `fast`);
-
-      model.goNextLevel();
-      model._state.time = 3;
-      assert.equal(model.checkAnswer(secondAnswer, model.correctAnswer, model.timeValue), `slow`);
-
-      model.goNextLevel();
-      model._state.time = 15;
-      assert.equal(model.checkAnswer(thirdAnswer, model.correctAnswer, model.timeValue), `correct`);
-
-      model.goNextLevel();
-      assert.equal(model.checkAnswer(fourthAnswer, model.correctAnswer, model.timeValue), `wrong`);
-
-      model.resetState();
+    it(`should add get correct final statistic`, () => {
+      model.name = `slava`;
+      model._state.statistic = [`fast`, `slow`, `correct`];
+      model._state.gameResult = `Loose`;
+      model._createFinalStatistic();
+      assert.deepEqual(model.allStatistic, [
+        {
+          statistic: [`fast`, `slow`, `correct`],
+          name: `slava`,
+          date: Date.now(),
+          result: `Loose`
+        }
+      ]);
+      model._resetState();
     });
   });
 });

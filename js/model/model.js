@@ -6,38 +6,37 @@ export default class Model {
   constructor() {
     this._state = Object.assign({}, InitialState);
     this._data = [];
-    this._subscribers = new Observer();
-    this.checkAnswer = Util.checkAnswer;
+    this._observer = new Observer();
     this.tick = () => {
-      if (this.timeValue > 0) {
+      if (this._timeValue > 0) {
         this._state.time -= 1;
-        Util.updateTimer(this.timeValue);
+        Util.updateTimer(this._timeValue);
       }
-      if (this.timeValue === 0) {
-        this.die();
-        this.goNextLevel();
+      if (this._timeValue === 0) {
+        this._die();
+        this._goNextLevel();
       }
     };
   }
 
-  get state() {
-    return this._state;
-  }
-
-  get levelValue() {
-    return this._state.level;
-  }
-
-  get timeValue() {
+  get _timeValue() {
     return this._state.time;
   }
 
-  get livesValue() {
-    return this._state.lives;
+  get _currentGameType() {
+    return this.levelData[`type`];
   }
 
-  get initialLivesValue() {
-    return InitialState.lives;
+  get _isLose() {
+    return this._state.lives < 1 || this._state.time < 1;
+  }
+
+  get _isMoreGameScreen() {
+    return this._state.level < this._data.length;
+  }
+
+  get state() {
+    return this._state;
   }
 
   get statistic() {
@@ -52,24 +51,16 @@ export default class Model {
     return this._data[this._state.level];
   }
 
-  get currentGameType() {
-    return this.levelData[`type`];
-  }
-
   get isLittleTime() {
     return this._state.time < GameSettings.LITTLE_TIME;
   }
 
-  get isLose() {
-    return this._state.lives < 1 || this._state.time < 1;
-  }
-
-  get isMoreGameScreen() {
-    return this._state.level < this._data.length;
-  }
-
   get correctAnswer() {
     return Util.getCorrectAnswer(this.levelData);
+  }
+
+  get allStatistic() {
+    return this._state.allStatistic;
   }
 
   set data(data) {
@@ -80,67 +71,81 @@ export default class Model {
     this._state.name = name;
   }
 
-  resetTimer() {
+  _resetTimer() {
     this._state.time = InitialState.time;
   }
 
-  stopTimer() {
+  _stopTimer() {
     window.clearInterval(this._intervalId);
   }
 
-  addSubscriber(func) {
-    this._subscribers.subscribe(func);
-  }
-
-  notifySubscribers(type, data) {
-    this._subscribers.notifySubscribers(type, data);
-  }
-
-  resetState() {
+  _resetState() {
     this._state = Object.assign({}, InitialState);
-    this._state.statistic = [];
   }
 
-  restartGame() {
-    this.resetState();
-    this.stopTimer();
-    this.notifySubscribers(GameType.RESTART, this);
-  }
-
-  die() {
+  _die() {
     this._state.lives -= 1;
   }
 
-  goNextLevel() {
+  _createFinalStatistic() {
+    const statistic = {
+      date: Date.now(),
+      statistic: [...this._state.statistic],
+      name: this._state.name,
+      result: this._state.gameResult
+    };
+
+    this._state.allStatistic = [statistic, ...this._state.allStatistic];
+  }
+
+  _finishGame(result) {
+    this._state.gameResult = result;
+    this._stopTimer();
+    this._createFinalStatistic();
+    return this.notifySubscribers(GameType.FINISH, this);
+  }
+
+  _goNextLevel() {
     this._state.level += 1;
-    this.resetTimer();
+    this._resetTimer();
 
-    if (!this.isMoreGameScreen) {
-      this._state.gameResult = GameResult.WIN;
-      this.stopTimer();
-      return this.notifySubscribers(GameType.FINISH, this);
+    if (!this._isMoreGameScreen) {
+      return this._finishGame(GameResult.WIN);
     }
 
-    if (this.isLose) {
-      this._state.gameResult = GameResult.LOOSE;
-      this.stopTimer();
-      return this.notifySubscribers(GameType.FINISH, this);
+    if (this._isLose) {
+      return this._finishGame(GameResult.LOOSE);
     }
 
-    return this.notifySubscribers(this.currentGameType, this);
+    return this.notifySubscribers(this._currentGameType, this);
+  }
+
+  addSubscriber(func) {
+    this._observer.subscribe(func);
+  }
+
+  notifySubscribers(type, data) {
+    this._observer.notifySubscribers(type, data);
   }
 
   startGame() {
-    this.notifySubscribers(this.currentGameType, this);
+    this.notifySubscribers(this._currentGameType, this);
     this._intervalId = window.setInterval(this.tick, 1000);
   }
 
+  restartGame() {
+    this._resetState();
+    this._stopTimer();
+    this.notifySubscribers(GameType.RESTART, this);
+  }
+
   saveAnswer(answers) {
-    const answer = this.checkAnswer(answers, this.correctAnswer, this.timeValue);
+    const answer = Util.checkAnswer(answers, this.correctAnswer, this._timeValue);
     if (answer === Result.WRONG) {
-      this.die();
+      this._die();
     }
+    this._state.statistic = [...this._state.statistic];
     this._state.statistic.push(answer);
-    this.goNextLevel();
+    this._goNextLevel();
   }
 }

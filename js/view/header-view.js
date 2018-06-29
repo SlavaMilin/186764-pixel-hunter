@@ -1,4 +1,5 @@
 import AbstractView from "./abstract-view";
+import {InitialState} from "../util/config";
 
 export default class HeaderView extends AbstractView {
   constructor(model) {
@@ -16,7 +17,7 @@ export default class HeaderView extends AbstractView {
   </div>
   <h1 class="game__timer">${this._state.time}</h1>
   <div class="game__lives">
-    ${Array(this._model.initialLivesValue - this._state.lives).fill(`<img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`).join(``)}
+    ${Array(InitialState.lives - this._state.lives).fill(`<img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`).join(``)}
     ${Array(this._state.lives).fill(`<img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">`).join(``)}
   </div>
 </header>

@@ -1,4 +1,5 @@
 import AbstractView from "./abstract-view";
+import Util from "../util/util";
 
 export default class GameThreeView extends AbstractView {
   constructor(model) {
@@ -8,7 +9,7 @@ export default class GameThreeView extends AbstractView {
   get template() {
     return `
 <div class="game"  data-answer="${this._model.correctAnswer}">
-  <p class="game__task">Найдите рисунок среди изображений</p>
+  <p class="game__task">${this._model.levelData.question}</p>
   <form class="game__content  game__content--triple">
     ${Array(this._data.answers.length).fill(``).map((it, i) => (`
     <div class="game__option" data-index="${i}">
@@ -17,7 +18,7 @@ export default class GameThreeView extends AbstractView {
     `)).join(``)}
   </form>
   <div class="stats">
-    ${this.statistic.template}
+    ${Util.getStatisticTemplate(this._model.statistic)}
   </div>
 </div>
 <footer class="footer">

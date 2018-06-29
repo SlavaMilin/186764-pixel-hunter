@@ -1,5 +1,6 @@
 import AbstractView from "./abstract-view";
 import {AnswerType} from "../util/config";
+import Util from "../util/util";
 
 export default class GameTwoView extends AbstractView {
   constructor(model) {
@@ -26,7 +27,7 @@ export default class GameTwoView extends AbstractView {
     `)).join(``)}
   </form>
   <div class="stats">
-    ${this.statistic.template}
+    ${Util.getStatisticTemplate(this._model.statistic)}
   </div>
 </div>
 <footer class="footer">

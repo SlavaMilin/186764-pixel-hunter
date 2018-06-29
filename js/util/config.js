@@ -50,7 +50,7 @@ const AnswerType = {
 
 const BackendSettings = {
   GET_QUESTIONS_URL: `https://es.dump.academy/pixel-hunter/questions`,
-  UPLOAD_STATISTIC_URL: `http://localhost:3000/stats`,
+  UPLOAD_STATISTIC_URL: `https://es.dump.academy/pixel-hunter/stats/`,
   APP_ID: 186764
 };
 

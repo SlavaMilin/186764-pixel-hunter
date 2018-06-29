@@ -77,8 +77,16 @@ export default class App {
   }
 
   static showFinish(model) {
-    const finish = new FinishPresenter(model);
-    finish.render();
+    const backend = new Backend();
+    backend.uploadStatistic(model.finalStatistic).then(() => {
+      return backend.downloadStatistic(model.name);
+    }).then((statistic) => {
+      statistic = statistic.reverse();
+      model.allStatistic = statistic;
+    }).then(() => {
+      const finish = new FinishPresenter(model);
+      finish.render();
+    });
   }
 }
 

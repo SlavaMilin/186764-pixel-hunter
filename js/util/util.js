@@ -78,8 +78,10 @@ export default class Util {
     return result;
   }
 
-  static analysisStatistic(statistic, liveValue) {
-    const correct = statistic.filter((it) => (it !== Result.WRONG)).length;
+  static analysisStatistic(statistic) {
+    const errors = statistic.filter((it) => ((it === Result.WRONG))).length;
+    const liveValue = InitialState.lives - errors;
+    const correct = statistic.length - errors;
     const slowValue = statistic.filter((it) => (it === Result.SLOW)).length;
     const fastValue = statistic.filter((it) => (it === Result.FAST)).length;
 

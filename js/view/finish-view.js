@@ -3,8 +3,8 @@ import {GameResult} from "../util/config";
 import Util from "../util/util";
 
 export default class FinishView extends AbstractView {
-  constructor(data) {
-    super(data);
+  constructor(model) {
+    super(model);
   }
 
   get template() {

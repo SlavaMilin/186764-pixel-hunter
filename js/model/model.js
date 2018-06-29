@@ -63,12 +63,25 @@ export default class Model {
     return this._state.allStatistic;
   }
 
+  get finalStatistic() {
+    return {
+      date: Date.now(),
+      statistic: [...this._state.statistic],
+      name: this._state.name,
+      result: this._state.gameResult
+    };
+  }
+
   set data(data) {
     this._data = [...data];
   }
 
   set name(name) {
     this._state.name = name;
+  }
+
+  set allStatistic(statistic) {
+    this._state.allStatistic = [...statistic];
   }
 
   _resetTimer() {
@@ -87,21 +100,9 @@ export default class Model {
     this._state.lives -= 1;
   }
 
-  _createFinalStatistic() {
-    const statistic = {
-      date: Date.now(),
-      statistic: [...this._state.statistic],
-      name: this._state.name,
-      result: this._state.gameResult
-    };
-
-    this._state.allStatistic = [statistic, ...this._state.allStatistic];
-  }
-
   _finishGame(result) {
     this._state.gameResult = result;
     this._stopTimer();
-    this._createFinalStatistic();
     return this.notifySubscribers(GameType.FINISH, this);
   }
 
@@ -109,12 +110,12 @@ export default class Model {
     this._state.level += 1;
     this._resetTimer();
 
-    if (!this._isMoreGameScreen) {
-      return this._finishGame(GameResult.WIN);
-    }
-
     if (this._isLose) {
       return this._finishGame(GameResult.LOOSE);
+    }
+
+    if (!this._isMoreGameScreen) {
+      return this._finishGame(GameResult.WIN);
     }
 
     return this.notifySubscribers(this._currentGameType, this);
@@ -144,8 +145,7 @@ export default class Model {
     if (answer === Result.WRONG) {
       this._die();
     }
-    this._state.statistic = [...this._state.statistic];
-    this._state.statistic.push(answer);
+    this._state.statistic = [...this._state.statistic, answer];
     this._goNextLevel();
   }
 }

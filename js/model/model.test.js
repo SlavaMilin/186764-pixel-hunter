@@ -168,15 +168,12 @@ describe(`test model`, () => {
       model.name = `slava`;
       model._state.statistic = [`fast`, `slow`, `correct`];
       model._state.gameResult = `Loose`;
-      model._createFinalStatistic();
-      assert.deepEqual(model.allStatistic, [
-        {
-          statistic: [`fast`, `slow`, `correct`],
-          name: `slava`,
-          date: Date.now(),
-          result: `Loose`
-        }
-      ]);
+      assert.deepEqual(model.finalStatistic, {
+        statistic: [`fast`, `slow`, `correct`],
+        name: `slava`,
+        date: Date.now(),
+        result: `Loose`
+      });
       model._resetState();
     });
   });

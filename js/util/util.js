@@ -143,4 +143,15 @@ export default class Util {
 
     return result;
   }
+
+  static paintLowTime(time) {
+    const timer = document.querySelector(`.game__timer`);
+
+    if (time <= GameSettings.LITTLE_TIME) {
+      timer.style.color = `red`;
+    }
+    if (time < GameSettings.LITTLE_TIME && !(time % 2)) {
+      timer.style.color = ``;
+    }
+  }
 }

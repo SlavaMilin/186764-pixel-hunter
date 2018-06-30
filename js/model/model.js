@@ -12,6 +12,9 @@ export default class Model {
         this._state.time -= 1;
         Util.updateTimer(this._timeValue);
       }
+
+      Util.paintLowTime(this._timeValue);
+
       if (this._timeValue === 0) {
         this._die();
         this._goNextLevel();

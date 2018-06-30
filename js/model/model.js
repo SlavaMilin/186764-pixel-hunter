@@ -35,7 +35,7 @@ export default class Model {
     return this._state.level < this._data.length;
   }
 
-  get _finalStatistic() {
+  get finalStatistic() {
     return {
       date: Date.now(),
       statistic: [...this._state.statistic],

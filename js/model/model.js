@@ -28,7 +28,7 @@ export default class Model {
   }
 
   get _isLose() {
-    return this._state.lives < 1 || this._state.time < 1;
+    return this._state.lives < 0 || this._state.time < 1;
   }
 
   get _isMoreGameScreen() {

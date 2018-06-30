@@ -15,6 +15,12 @@ const Result = {
   SLOW: `slow`,
 };
 
+const StepValue = {
+  TIME: 1,
+  LIVE: 1,
+  LEVEL: 1
+};
+
 const GameResult = {
   WIN: `Победа!`,
   LOOSE: `Fail`
@@ -55,4 +61,4 @@ const BackendSettings = {
   APP_ID: 186764
 };
 
-export {InitialState, Result, GameSettings, GameType, BackendSettings, AnswerType, GameResult, ScoreSettings};
+export {InitialState, Result, GameSettings, GameType, BackendSettings, AnswerType, GameResult, ScoreSettings, StepValue};

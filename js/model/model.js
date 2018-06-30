@@ -1,4 +1,4 @@
-import {InitialState, GameType, Result, GameResult} from "../util/config";
+import {InitialState, GameType, Result, GameResult, StepValue} from "../util/config";
 import Observer from "../util/observer";
 import Util from "../util/util";
 
@@ -9,7 +9,7 @@ export default class Model {
     this._observer = new Observer();
     this.tick = () => {
       if (this._timeValue > 0) {
-        this._state.time -= 1;
+        this._state.time -= StepValue.TIME;
         Util.updateTimer(this._timeValue);
       }
 
@@ -104,7 +104,7 @@ export default class Model {
   }
 
   _die() {
-    this._state.lives -= 1;
+    this._state.lives -= StepValue.LIVE;
     this._state.statistic = [...this._state.statistic, Result.WRONG];
   }
 
@@ -115,7 +115,7 @@ export default class Model {
   }
 
   _goNextLevel() {
-    this._state.level += 1;
+    this._state.level += StepValue.LEVEL;
     this._resetTimer();
 
     if (this._isLose) {

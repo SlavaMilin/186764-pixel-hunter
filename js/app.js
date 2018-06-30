@@ -11,6 +11,7 @@ import HeaderPresenter from "./presenter/header-presenter";
 import FinishPresenter from "./presenter/finish-presenter";
 import ModalErrorPresenter from "./presenter/modal-error-presenter";
 import SpinnerPresenter from "./presenter/spinner-presenter";
+import GreetingsPresenter from "./presenter/greetings-presenter";
 
 
 export default class App {
@@ -26,6 +27,10 @@ export default class App {
 
       case GameType.TINDER_LIKE:
         App.showGameOne(model);
+        break;
+
+      case GameType.GREETINGS:
+        App.showGreetings(model);
         break;
 
       case GameType.RULES:
@@ -59,14 +64,18 @@ export default class App {
       const promises = Util.addImgLoaders(srcList);
       return Promise.all(promises);
     }).then(() => {
-      const rules = new RulesPresenter(model);
-      rules.render();
-    }).then(() => {
+      const greetings = new GreetingsPresenter(model);
+      greetings.render();
     }).catch((error) => {
       model.errorMessage = error;
       const modalError = new ModalErrorPresenter(model);
       modalError.render();
     }).then(() => spinner.remove());
+  }
+
+  static showGreetings(model) {
+    const greetings = new GreetingsPresenter(model);
+    greetings.render();
   }
 
   static showRules(model) {

@@ -72,6 +72,14 @@ export default class Model {
     };
   }
 
+  get errorMessage() {
+    return this._state.errorMessage;
+  }
+
+  set errorMessage(error) {
+    this._state.errorMessage = error;
+  }
+
   set data(data) {
     this._data = [...data];
   }

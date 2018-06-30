@@ -1,4 +1,4 @@
-import {GameSettings, InitialState, GameType, Result, GameResult} from "../util/config";
+import {InitialState, GameType, Result, GameResult} from "../util/config";
 import Observer from "../util/observer";
 import Util from "../util/util";
 
@@ -58,10 +58,6 @@ export default class Model {
 
   get levelData() {
     return this._data[this._state.level];
-  }
-
-  get isLittleTime() {
-    return this._state.time < GameSettings.LITTLE_TIME;
   }
 
   get correctAnswer() {

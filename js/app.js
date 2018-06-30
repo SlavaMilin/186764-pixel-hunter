@@ -13,28 +13,30 @@ import ModalErrorPresenter from "./presenter/modal-error-presenter";
 
 export default class App {
   gameSelecter(type, model) {
-    if (type === GameType.ONE_OF_THREE) {
-      App.showGameThree(model);
-    }
+    switch (type) {
+      case GameType.ONE_OF_THREE:
+        App.showGameThree(model);
+        break;
 
-    if (type === GameType.TWO_OF_TWO) {
-      App.showGameTwo(model);
-    }
+      case GameType.TWO_OF_TWO:
+        App.showGameTwo(model);
+        break;
 
-    if (type === GameType.TINDER_LIKE) {
-      App.showGameOne(model);
-    }
+      case GameType.TINDER_LIKE:
+        App.showGameOne(model);
+        break;
 
-    if (type === GameType.RULES) {
-      App.showRules(model);
-    }
+      case GameType.RULES:
+        App.showRules(model);
+        break;
 
-    if (type === GameType.RESTART) {
-      App.showRules(model);
-    }
+      case GameType.RESTART:
+        App.showRules(model);
+        break;
 
-    if (type === GameType.FINISH) {
-      App.showFinish(model);
+      case GameType.FINISH:
+        App.showFinish(model);
+        break;
     }
   }
 

@@ -8,6 +8,7 @@ import GameOnePresenter from "./presenter/game-one-presenter";
 import RulesPresenter from "./presenter/rules-presenter";
 import HeaderPresenter from "./presenter/header-presenter";
 import FinishPresenter from "./presenter/finish-presenter";
+import ModalErrorPresenter from "./presenter/modal-error-presenter";
 
 
 export default class App {
@@ -47,6 +48,10 @@ export default class App {
       model.data = data;
     }).then(() => {
       intro.render();
+    }).catch((error) => {
+      model.errorMessage = error;
+      const modalError = new ModalErrorPresenter(model);
+      modalError.render();
     });
   }
 
@@ -86,6 +91,10 @@ export default class App {
     }).then(() => {
       const finish = new FinishPresenter(model);
       finish.render();
+    }).catch((error) => {
+      model.errorMessage = error;
+      const modalError = new ModalErrorPresenter(model);
+      modalError.render();
     });
   }
 }

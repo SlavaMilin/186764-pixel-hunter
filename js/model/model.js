@@ -72,15 +72,6 @@ export default class Model {
     return this._state.allStatistic;
   }
 
-  get finalStatistic() {
-    return {
-      date: Date.now(),
-      statistic: [...this._state.statistic],
-      name: this._state.name,
-      result: this._state.gameResult
-    };
-  }
-
   get errorMessage() {
     return this._state.errorMessage;
   }

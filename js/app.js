@@ -9,6 +9,7 @@ import RulesPresenter from "./presenter/rules-presenter";
 import HeaderPresenter from "./presenter/header-presenter";
 import FinishPresenter from "./presenter/finish-presenter";
 import ModalErrorPresenter from "./presenter/modal-error-presenter";
+import SpinnerPresenter from "./presenter/spinner-presenter";
 
 
 export default class App {
@@ -45,6 +46,8 @@ export default class App {
     model.addSubscriber(this.gameSelecter);
     const backend = new Backend();
     const intro = new IntroPresenter(model);
+    const spinner = new SpinnerPresenter(model);
+    spinner.render();
 
     backend.loadData().then((data) => {
       model.data = data;

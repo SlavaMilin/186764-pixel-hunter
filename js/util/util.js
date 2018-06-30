@@ -126,4 +126,21 @@ export default class Util {
     }
     return result;
   }
+
+  static addImgLoaders(src) {
+    const result = [];
+
+    src.forEach((it) => {
+      result.push(new Promise((onSuccess, onError) => {
+        const img = new Image();
+        img.src = it;
+        img.addEventListener(`load`, () => onSuccess(img));
+        img.onerror = () => {
+          onError(`Не удалось загрузить изображение, пожалуйста, перезагрузите страницу.`);
+        };
+      }));
+    });
+
+    return result;
+  }
 }

@@ -105,6 +105,7 @@ export default class Model {
 
   _die() {
     this._state.lives -= 1;
+    this._state.statistic = [...this._state.statistic, Result.WRONG];
   }
 
   _finishGame(result) {

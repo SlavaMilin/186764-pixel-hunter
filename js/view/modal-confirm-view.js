@@ -1,9 +1,8 @@
 import AbstractView from "./abstract-view";
 
 export default class ModalConfirmView extends AbstractView {
-  constructor(state) {
-    super();
-    this._state = state;
+  constructor(model) {
+    super(model);
   }
 
   get template() {
@@ -23,8 +22,25 @@ export default class ModalConfirmView extends AbstractView {
   }
 
   onAnswer() {}
+  onConfirmClick() {}
 
-  bind() {
+  bind(element) {
+    const removeModal = () => {
+      document.querySelector(`.modal-confirm`).remove();
+    };
 
+    element.querySelectorAll(`.modal-confirm__btn`)[1].addEventListener(`click`, (evt) => {
+      evt.preventDefault();
+      removeModal();
+    });
+    element.querySelector(`.modal-confirm__close`).addEventListener(`click`, (evt) => {
+      evt.preventDefault();
+      removeModal();
+    });
+    element.querySelectorAll(`.modal-confirm__btn`)[0].addEventListener(`click`, (evt) => {
+      evt.preventDefault();
+      this.onConfirmClick();
+      removeModal();
+    });
   }
 }

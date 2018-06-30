@@ -20,7 +20,6 @@ export default class HeaderPresenter extends AbstractPresenter {
     container.insertBefore(this._element, firstChild);
   }
 
-
   onConfirmClick() {
     this._model.restartGame();
   }

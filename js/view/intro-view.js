@@ -24,13 +24,4 @@ export default class IntroView extends AbstractView {
   </footer>
     `;
   }
-
-  onAnswer() {}
-
-  bind(element) {
-    const btn = element.querySelector(`.intro__asterisk`);
-    btn.addEventListener(`click`, () => {
-      this.onAnswer();
-    });
-  }
 }

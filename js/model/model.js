@@ -35,6 +35,15 @@ export default class Model {
     return this._state.level < this._data.length;
   }
 
+  get _finalStatistic() {
+    return {
+      date: Date.now(),
+      statistic: [...this._state.statistic],
+      name: this._state.name,
+      result: this._state.gameResult
+    };
+  }
+
   get state() {
     return this._state;
   }

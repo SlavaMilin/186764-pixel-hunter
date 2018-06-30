@@ -115,4 +115,15 @@ export default class Util {
 </ul>
     `;
   }
+
+  static chooseUnicImg(data) {
+    const result = new Set();
+
+    for (const key of data) {
+      key.answers.forEach((it) => {
+        result.add(it.image.url);
+      });
+    }
+    return result;
+  }
 }

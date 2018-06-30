@@ -122,7 +122,7 @@ describe(`test model`, () => {
 
   it(`should check is game lose`, () => {
     assert.equal(model._isLose, false);
-    model._state.lives = 0;
+    model._state.lives = -1;
     assert.equal(model._isLose, true);
     model._resetState();
     model._state.time = 0;

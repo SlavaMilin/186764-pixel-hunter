@@ -47,12 +47,10 @@ export default class GameTwoView extends AbstractView {
 
   bind(element) {
     element.querySelector(`.game__content`).addEventListener(`change`, () => {
+      const NEED_SELECTED_PHOTOS = 2;
       const inputs = document.querySelectorAll(`input:checked`);
-      if (inputs.length === 2) {
-        const result = [];
-        for (const key of inputs) {
-          result.push(key.dataset.value);
-        }
+      if (inputs.length === NEED_SELECTED_PHOTOS) {
+        const result = [...inputs].map((it) => it.dataset.value);
         this.onAnswer(result);
       }
     });

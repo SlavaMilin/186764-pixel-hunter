@@ -17,8 +17,4 @@ export default class ModalErrorView extends AbstractView {
   }
 
   onAnswer() {}
-
-  bind() {
-
-  }
 }

@@ -102,11 +102,11 @@ export default class FinishView extends AbstractView {
     `;
   }
 
-  onBackClick() {}
-
   bind(element) {
     element.querySelector(`.back`).addEventListener(`click`, () => {
       this.onBackClick();
     });
   }
+
+  onBackClick() {}
 }

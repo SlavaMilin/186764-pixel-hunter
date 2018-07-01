@@ -33,9 +33,9 @@ export default class GreetingView extends AbstractView {
     `;
   }
 
-  onAnswer() {}
-
   bind(element) {
     element.querySelector(`.greeting__continue`).addEventListener(`click`, this.onAnswer);
   }
+
+  onAnswer() {}
 }

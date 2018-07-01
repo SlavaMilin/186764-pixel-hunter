@@ -21,9 +21,6 @@ export default class ModalConfirmView extends AbstractView {
     `;
   }
 
-  onAnswer() {}
-  onConfirmClick() {}
-
   bind(element) {
     const removeModal = () => {
       document.querySelector(`.modal-confirm`).remove();
@@ -43,4 +40,7 @@ export default class ModalConfirmView extends AbstractView {
       removeModal();
     });
   }
+
+  onAnswer() {}
+  onConfirmClick() {}
 }

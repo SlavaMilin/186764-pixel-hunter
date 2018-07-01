@@ -34,8 +34,6 @@ export default class GameThreeView extends AbstractView {
     `;
   }
 
-  onAnswer() {}
-
   bind(element) {
     const form = element.querySelector(`.game__content`);
     form.addEventListener(`click`, (evt) => {
@@ -44,4 +42,6 @@ export default class GameThreeView extends AbstractView {
       }
     });
   }
+
+  onAnswer() {}
 }

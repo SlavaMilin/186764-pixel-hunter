@@ -41,8 +41,6 @@ export default class GameOneView extends AbstractView {
     `;
   }
 
-  onAnswer() {}
-
   bind(element) {
     element.querySelector(`.game__content`).addEventListener(`click`, (evt) => {
       if (evt.target.dataset.value) {
@@ -50,4 +48,6 @@ export default class GameOneView extends AbstractView {
       }
     });
   }
+
+  onAnswer() {}
 }

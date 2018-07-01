@@ -60,9 +60,9 @@ export default class App {
     backend.loadData().then((data) => {
       model.data = data;
     }).then(() => {
-      const srcList = Util.chooseUnicImg(model._data);
-      const promises = Util.addImgLoaders(srcList);
-      return Promise.all(promises);
+      // const srcList = Util.chooseUnicImg(model._data);
+      // const promises = Util.addImgLoaders(srcList);
+      // return Promise.all(promises);
     }).then(() => {
       const greetings = new GreetingsPresenter(model);
       greetings.render();

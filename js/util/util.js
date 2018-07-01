@@ -40,8 +40,8 @@ export default class Util {
   }
 
   static checkAnswer(answers, correctAnswers, time) {
-    let fast = false;
-    let slow = false;
+    const fast = (time > InitialState.time - GameSettings.FAST_ANSWER);
+    const slow = (time < InitialState.time - GameSettings.SLOW_ANSWER);
     let correct = true;
     let result = ``;
 
@@ -50,13 +50,6 @@ export default class Util {
         correct = false;
         break;
       }
-    }
-
-    if (time > InitialState.time - GameSettings.FAST_ANSWER) {
-      fast = true;
-    }
-    if (time < InitialState.time - GameSettings.SLOW_ANSWER) {
-      slow = true;
     }
 
     if (fast && correct) {

@@ -13,8 +13,8 @@ export default class ModalConfirmView extends AbstractView {
     <h2 class="modal-confirm__title">Подтверждение</h2>
     <p class="modal-confirm__text">Вы уверены что хотите начать игру заново?</p>
     <div class="modal-confirm__btn-wrap">
-      <button class="modal-confirm__btn">Ок</button>
-      <button class="modal-confirm__btn">Отмена</button>
+      <button class="modal-confirm__btn modal-confirm__btn--accept">Ок</button>
+      <button class="modal-confirm__btn modal-confirm__btn--cancel">Отмена</button>
     </div>
   </form>
 </section>
@@ -26,7 +26,7 @@ export default class ModalConfirmView extends AbstractView {
       document.querySelector(`.modal-confirm`).remove();
     };
 
-    element.querySelectorAll(`.modal-confirm__btn`)[1].addEventListener(`click`, (evt) => {
+    element.querySelector(`.modal-confirm__btn--cancel`).addEventListener(`click`, (evt) => {
       evt.preventDefault();
       removeModal();
     });
@@ -34,7 +34,7 @@ export default class ModalConfirmView extends AbstractView {
       evt.preventDefault();
       removeModal();
     });
-    element.querySelectorAll(`.modal-confirm__btn`)[0].addEventListener(`click`, (evt) => {
+    element.querySelector(`.modal-confirm__btn--accept`).addEventListener(`click`, (evt) => {
       evt.preventDefault();
       this.onConfirmClick();
       removeModal();

@@ -17,6 +17,7 @@ export default class Model {
 
       if (this._timeValue === 0) {
         this._die();
+        this._state.statistic = [...this._state.statistic, Result.WRONG];
         this._goNextLevel();
       }
     };
@@ -133,7 +134,6 @@ export default class Model {
 
   _die() {
     this._state.lives -= StepValue.LIVE;
-    this._state.statistic = [...this._state.statistic, Result.WRONG];
   }
 
   _finishGame(result) {

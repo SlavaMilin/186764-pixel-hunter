@@ -64,7 +64,7 @@ export default class Util {
       result = Result.CORRECT;
     }
 
-    if (correct === false) {
+    if (!correct) {
       result = Result.WRONG;
     }
 

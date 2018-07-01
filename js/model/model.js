@@ -22,22 +22,6 @@ export default class Model {
     };
   }
 
-  get _timeValue() {
-    return this._state.time;
-  }
-
-  get _currentGameType() {
-    return this.levelData[`type`];
-  }
-
-  get _isLose() {
-    return this._state.lives < 0 || this._state.time < 1;
-  }
-
-  get _isMoreGameScreen() {
-    return this._state.level < this._data.length;
-  }
-
   get finalStatistic() {
     return {
       date: Date.now(),
@@ -91,6 +75,50 @@ export default class Model {
     this._state.allStatistic = [...statistic];
   }
 
+  get _timeValue() {
+    return this._state.time;
+  }
+
+  get _currentGameType() {
+    return this.levelData[`type`];
+  }
+
+  get _isLose() {
+    return this._state.lives < 0 || this._state.time < 1;
+  }
+
+  get _isMoreGameScreen() {
+    return this._state.level < this._data.length;
+  }
+
+  addSubscriber(func) {
+    this._observer.subscribe(func);
+  }
+
+  notifySubscribers(type, data) {
+    this._observer.notifySubscribers(type, data);
+  }
+
+  startGame() {
+    this.notifySubscribers(this._currentGameType, this);
+    this._intervalId = window.setInterval(this.tick, 1000);
+  }
+
+  restartGame() {
+    this._resetState();
+    this._stopTimer();
+    this.notifySubscribers(GameType.RESTART, this);
+  }
+
+  saveAnswer(answers) {
+    const answer = Util.checkAnswer(answers, this.correctAnswer, this._timeValue);
+    if (answer === Result.WRONG) {
+      this._die();
+    }
+    this._state.statistic = [...this._state.statistic, answer];
+    this._goNextLevel();
+  }
+
   _resetTimer() {
     this._state.time = InitialState.time;
   }
@@ -127,33 +155,5 @@ export default class Model {
     }
 
     return this.notifySubscribers(this._currentGameType, this);
-  }
-
-  addSubscriber(func) {
-    this._observer.subscribe(func);
-  }
-
-  notifySubscribers(type, data) {
-    this._observer.notifySubscribers(type, data);
-  }
-
-  startGame() {
-    this.notifySubscribers(this._currentGameType, this);
-    this._intervalId = window.setInterval(this.tick, 1000);
-  }
-
-  restartGame() {
-    this._resetState();
-    this._stopTimer();
-    this.notifySubscribers(GameType.RESTART, this);
-  }
-
-  saveAnswer(answers) {
-    const answer = Util.checkAnswer(answers, this.correctAnswer, this._timeValue);
-    if (answer === Result.WRONG) {
-      this._die();
-    }
-    this._state.statistic = [...this._state.statistic, answer];
-    this._goNextLevel();
   }
 }

@@ -1,8 +1,8 @@
 import AbstractView from "./abstract-view";
 
 export default class IntroView extends AbstractView {
-  constructor() {
-    super();
+  constructor(model) {
+    super(model);
   }
 
   get template() {
@@ -23,11 +23,5 @@ export default class IntroView extends AbstractView {
     </div>
   </footer>
     `;
-  }
-
-  onAnswer() {}
-
-  bind() {
-
   }
 }

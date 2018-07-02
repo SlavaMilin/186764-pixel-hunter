@@ -1,4 +1,5 @@
 import App from "./app";
 
-App.showRules();
+const app = new App();
+app.showIntro();
 

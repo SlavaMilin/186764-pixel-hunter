@@ -1,9 +1,8 @@
 import AbstractView from "./abstract-view";
 
-export default class Rules extends AbstractView {
-  constructor(state) {
-    super();
-    this._state = state;
+export default class RulesView extends AbstractView {
+  constructor(model) {
+    super(model);
   }
 
   get template() {
@@ -47,7 +46,19 @@ export default class Rules extends AbstractView {
 
   onAnswer() {}
 
-  bind() {
+  bind(element) {
+    const btn = element.querySelector(`.rules__button`);
+    const nameInput = element.querySelector(`.rules__input`);
+    let value = ``;
 
+    nameInput.addEventListener(`input`, (evt) => {
+      value = evt.target.value;
+      btn.disabled = !value.length;
+    });
+
+    btn.addEventListener(`click`, (evt) => {
+      evt.preventDefault();
+      this.onAnswer(value);
+    });
   }
 }

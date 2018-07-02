@@ -2,10 +2,6 @@ import {assert} from "chai";
 import Model from "./model";
 import {InitialState} from "../util/config";
 
-const firstAnswer = [2];
-const secondAnswer = [`painting`, `photo`];
-const thirdAnswer = [`photo`];
-const fourthAnswer = [`painting`];
 
 const testData = [
   {
@@ -92,106 +88,87 @@ const testData = [
 
 describe(`test model`, () => {
   const model = new Model();
-  model.setData = testData;
+  model.data = testData;
 
   it(`should return state`, () => {
-    assert.deepEqual(model.getState, InitialState);
+    assert.deepEqual(model.state, InitialState);
   });
 
   it(`should reset state to default`, () => {
-    model.tick();
-    model.resetStateToDefault();
-    assert.deepEqual(model.getState, InitialState);
-  });
-
-  it(`should return screen value`, () => {
-    assert.equal(model.getScreenValue, 0);
+    model._state.time -= 1;
+    model._state.gameResult = [{
+      answers: [`slow`, `fast`]
+    }];
+    model._state.statistic = [`slow`, `fast`];
+    model._resetState();
+    assert.deepEqual(model.state, InitialState);
   });
 
   it(`should increase screen number by 1`, () => {
-    assert.equal(model.getScreenValue, 0);
-    model.goNextLevel();
-    assert.equal(model.getScreenValue, 1);
+    assert.equal(model._state.level, 0);
+    model._goNextLevel();
+    assert.equal(model._state.level, 1);
   });
 
   it(`should return current time`, () => {
-    assert.equal(model.getTimeValue, 30);
-  });
-
-  it(`should decrease time by 1`, () => {
-    assert.equal(model.getTimeValue, 30);
-    model.tick();
-    assert.equal(model.getTimeValue, 29);
-  });
-
-  it(`should get errors value`, () => {
-    assert.equal(model.getLives, 3);
+    assert.equal(model._timeValue, 30);
   });
 
   it(`should subtract live`, () => {
-    assert.equal(model.getLives, 3);
-    model.die();
-    assert.equal(model.getLives, 2);
+    assert.equal(model._state.lives, 3);
+    model._die();
+    assert.equal(model._state.lives, 2);
   });
 
   it(`should check is game lose`, () => {
-    assert.equal(model.isLose, false);
-    model._state.lives = 0;
-    assert.equal(model.isLose, true);
-    model.resetStateToDefault();
+    assert.equal(model._isLose, false);
+    model._state.lives = -1;
+    assert.equal(model._isLose, true);
+    model._resetState();
     model._state.time = 0;
-    assert.equal(model.isLose, true);
-    model.resetStateToDefault();
-  });
-
-  it(`should check is it little time`, () => {
-    assert.equal(model.isLittleTime, false);
-    model._state.time = 1;
-    assert.equal(model.isLittleTime, true);
+    assert.equal(model._isLose, true);
+    model._resetState();
   });
 
   it(`should return level data`, () => {
-    assert.deepEqual(model.getLevelData, testData[0]);
+    assert.deepEqual(model.levelData, testData[0]);
   });
 
   it(`should check is it more game screen`, () => {
-    assert.equal(model.isMoreGameScreen, true);
+    assert.equal(model._isMoreGameScreen, true);
     model._state.level = 4;
-    assert.equal(model.isMoreGameScreen, false);
-    model.resetStateToDefault();
+    assert.equal(model._isMoreGameScreen, false);
+    model._resetState();
   });
 
   it(`should return answer for current game`, () => {
-    assert.deepEqual(model.getCorrectAnswer(model.getLevelData), [2]);
-    model.goNextLevel();
-    assert.deepEqual(model.getCorrectAnswer(model.getLevelData), [`painting`, `photo`]);
-    model.goNextLevel();
-    assert.deepEqual(model.getCorrectAnswer(model.getLevelData), [`photo`]);
-    model.resetStateToDefault();
+    assert.deepEqual(model.correctAnswer, [2]);
+    model._goNextLevel();
+    assert.deepEqual(model.correctAnswer, [`painting`, `photo`]);
+    model._goNextLevel();
+    assert.deepEqual(model.correctAnswer, [`photo`]);
+    model._resetState();
+  });
+
+  it(`should save name return correct value`, () => {
+    model.name = `Vasia`;
+    assert.equal(model.name, `Vasia`);
+    model._resetState();
+    assert.equal(model.name, ``);
   });
 
   describe(`check game statistic`, () => {
-    it(`should check answer, save it to statistic of the game, and remove live if answer is wrong`, () => {
-      model.saveAnswer(firstAnswer);
-      model._state.time = 3;
-      model.goNextLevel();
-
-      model.saveAnswer(secondAnswer);
-      model._state.time = 15;
-      model.goNextLevel();
-
-      model.saveAnswer(thirdAnswer);
-      model.goNextLevel();
-
-      model.saveAnswer(fourthAnswer);
-
-      assert.deepEqual(model.getStatistic, [`fast`, `slow`, `correct`, `wrong`]);
+    it(`should add get correct final statistic`, () => {
+      model.name = `slava`;
+      model._state.statistic = [`fast`, `slow`, `correct`];
+      model._state.gameResult = `Loose`;
+      assert.deepEqual(model.finalStatistic, {
+        statistic: [`fast`, `slow`, `correct`],
+        name: `slava`,
+        date: Date.now(),
+        result: `Loose`
+      });
+      model._resetState();
     });
-
-    it(`should correct check rest lives`, () => {
-      assert.equal(model.getLives, 2);
-    });
-
-    model.resetStateToDefault();
   });
 });

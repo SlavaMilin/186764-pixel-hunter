@@ -16,7 +16,11 @@ export default class Backend {
     return fetch(BackendSettings.GET_QUESTIONS_URL).then(this.checkStatus).then(this.toJSON);
   }
 
-  uploadStatistic(data, userName) {
+  downloadStatistic(userName) {
+    return fetch(`${BackendSettings.UPLOAD_STATISTIC_URL}:${BackendSettings.APP_ID}-:${userName}`).then(this.checkStatus).then(this.toJSON);
+  }
+
+  uploadStatistic(data) {
     const requestSettings = {
       body: JSON.stringify(data),
       headers: {
@@ -24,6 +28,6 @@ export default class Backend {
       },
       method: `POST`
     };
-    return fetch(`${BackendSettings}/stats/:${BackendSettings.APP_ID}-:${userName}`, requestSettings).then(this.checkStatus);
+    return fetch(`${BackendSettings.UPLOAD_STATISTIC_URL}:${BackendSettings.APP_ID}-:${data.name}`, requestSettings).then(this.checkStatus);
   }
 }

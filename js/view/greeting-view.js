@@ -1,9 +1,8 @@
 import AbstractView from "./abstract-view";
 
-export default class Greeting extends AbstractView {
-  constructor(state) {
-    super();
-    this._state = state;
+export default class GreetingView extends AbstractView {
+  constructor(model) {
+    super(model);
   }
 
   get template() {
@@ -34,9 +33,9 @@ export default class Greeting extends AbstractView {
     `;
   }
 
-  onAnswer() {}
-
-  bind() {
-
+  bind(element) {
+    element.querySelector(`.greeting__continue`).addEventListener(`click`, this.onAnswer);
   }
+
+  onAnswer() {}
 }

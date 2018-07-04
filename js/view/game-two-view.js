@@ -14,7 +14,7 @@ export default class GameTwoView extends AbstractView {
   <form class="game__content">
     ${Array(this._data.answers.length).fill(``).map((it, i) => (`
     <div class="game__option">
-        <img src="${this._data.answers[i].image.url}" alt="Option ${i}" width="${this._data.answers[i].image.width}" height="${this._data.answers[i].image.height}">
+        <img src="${this._data.answers[i].image.url}" alt="Option ${i}">
       <label class="game__answer game__answer--photo">
         <input name="question${i}" type="radio" value="photo" data-value="${AnswerType.PHOTO}">
         <span>Фото</span>
@@ -46,6 +46,8 @@ export default class GameTwoView extends AbstractView {
   onAnswer() {}
 
   bind(element) {
+    const img = element.querySelectorAll(`.game__option img`);
+
     element.querySelector(`.game__content`).addEventListener(`change`, () => {
       const NEED_SELECTED_PHOTOS = 2;
       const inputs = document.querySelectorAll(`input:checked`);
@@ -53,6 +55,18 @@ export default class GameTwoView extends AbstractView {
         const result = [...inputs].map((it) => it.dataset.value);
         this.onAnswer(result);
       }
+    });
+
+    [...img].forEach((it, i) => {
+      it.addEventListener(`load`, (evt) => {
+        const currentSize = {
+          width: img[i].width,
+          height: img[i].height
+        };
+        const sizes = Util.resize(this._data.answers[i].image, currentSize);
+        evt.target.width = sizes.width;
+        evt.target.height = sizes.height;
+      });
     });
   }
 }

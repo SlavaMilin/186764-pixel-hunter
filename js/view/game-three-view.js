@@ -13,7 +13,7 @@ export default class GameThreeView extends AbstractView {
   <form class="game__content  game__content--triple">
     ${Array(this._data.answers.length).fill(``).map((it, i) => (`
     <div class="game__option" data-index="${i}">
-      <img src="${this._data.answers[i].image.url}" alt="Option ${i}" width="${this._data.answers[i].image.width}" height="${this._data.answers[i].image.height}">
+      <img src="${this._data.answers[i].image.url}" alt="Option ${i}">
     </div>
     `)).join(``)}
   </form>
@@ -36,10 +36,24 @@ export default class GameThreeView extends AbstractView {
 
   bind(element) {
     const form = element.querySelector(`.game__content`);
+    const img = element.querySelectorAll(`.game__option img`);
+
     form.addEventListener(`click`, (evt) => {
       if (evt.target.className === `game__option`) {
         this.onAnswer([Number(evt.target.dataset.index)]);
       }
+    });
+
+    [...img].forEach((it, i) => {
+      it.addEventListener(`load`, (evt) => {
+        const currentSize = {
+          width: img[i].width,
+          height: img[i].height
+        };
+        const sizes = Util.resize(this._data.answers[i].image, currentSize);
+        evt.target.width = sizes.width;
+        evt.target.height = sizes.height;
+      });
     });
   }
 

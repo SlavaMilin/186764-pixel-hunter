@@ -13,7 +13,7 @@ export default class GameOneView extends AbstractView {
   <p class="game__task">Угадай, фото или рисунок?</p>
   <form class="game__content  game__content--wide">
     <div class="game__option">
-      <img src="${this._data.answers[0].image.url}" alt="Option 1" width="${this._data.answers[0].image.width}" height="${this._data.answers[0].image.height}">
+      <img src="${this._data.answers[0].image.url}" alt="Option 1">
       <label class="game__answer  game__answer--photo">
         <input name="question1" type="radio" value="photo" data-value="${AnswerType.PHOTO}">
         <span>Фото</span>
@@ -42,10 +42,22 @@ export default class GameOneView extends AbstractView {
   }
 
   bind(element) {
+    const img = element.querySelector(`.game__option img`);
+
     element.querySelector(`.game__content`).addEventListener(`click`, (evt) => {
       if (evt.target.dataset.value) {
         this.onAnswer([evt.target.dataset.value]);
       }
+    });
+
+    img.addEventListener(`load`, (evt) => {
+      const currentSize = {
+        width: img.width,
+        height: img.height
+      };
+      const sizes = Util.resize(this._data.answers[0].image, currentSize);
+      evt.target.width = sizes.width;
+      evt.target.height = sizes.height;
     });
   }
 

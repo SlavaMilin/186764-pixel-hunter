@@ -65,7 +65,12 @@ export default class App {
       return Promise.all(promises);
     }).then(() => {
       const greetings = new GreetingsPresenter(model);
-      greetings.render();
+      const FADE_TIMEOUT = 500;
+      Util.crossFadeIn();
+      window.setTimeout(() => {
+        greetings.render();
+        Util.crossFadeOut();
+      }, FADE_TIMEOUT);
     }).catch((error) => {
       model.errorMessage = error;
       const modalError = new ModalErrorPresenter(model);

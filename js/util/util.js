@@ -163,4 +163,16 @@ export default class Util {
 
     throw new Error(`error format`);
   }
+
+  static crossFadeIn() {
+    const container = document.querySelector(`.central`);
+    container.style.transition = `opacity 0.5s ease-in-out`;
+    container.style.opacity = 0;
+  }
+
+  static crossFadeOut() {
+    const container = document.querySelector(`.central`);
+    container.style.transition = `opacity 0.5s ease-in-out`;
+    container.style.opacity = 1;
+  }
 }

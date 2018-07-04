@@ -147,4 +147,20 @@ export default class Util {
       timer.style.color = ``;
     }
   }
+
+  static resize(boxSize, imgSize) {
+    if (imgSize.width / boxSize.width === imgSize.height / boxSize.height) {
+      return boxSize;
+    }
+
+    if (imgSize.width / boxSize.width > imgSize.height / boxSize.height) {
+      return Object.assign({}, boxSize, {height: Math.floor(boxSize.height / 2)});
+    }
+
+    if (imgSize.width / boxSize.width < imgSize.height / boxSize.height) {
+      return Object.assign({}, boxSize, {width: Math.floor(boxSize.width / 2)});
+    }
+
+    throw new Error(`error format`);
+  }
 }

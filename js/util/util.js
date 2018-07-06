@@ -149,19 +149,14 @@ export default class Util {
   }
 
   static resize(boxSize, imgSize) {
-    if (imgSize.width / boxSize.width === imgSize.height / boxSize.height) {
-      return boxSize;
-    }
+    const widthScale = imgSize.width / boxSize.width;
+    const heightScale = imgSize.height / boxSize.height;
+    const scale = Math.max(widthScale, heightScale);
 
-    if (imgSize.width / boxSize.width > imgSize.height / boxSize.height) {
-      return Object.assign({}, boxSize, {height: Math.floor(boxSize.height / 2)});
-    }
-
-    if (imgSize.width / boxSize.width < imgSize.height / boxSize.height) {
-      return Object.assign({}, boxSize, {width: Math.floor(boxSize.width / 2)});
-    }
-
-    throw new Error(`error format`);
+    return {
+      width: Math.floor(imgSize.width / scale),
+      height: Math.floor(imgSize.height / scale)
+    };
   }
 
   static crossFadeIn() {
